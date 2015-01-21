@@ -141,8 +141,8 @@ clean()
 def print_board(BOARD):
     for row in BOARD:
         print " ".join(row)
-print "::: Battleship :::"
-print "Let's play Battleship!!!  "
+print "::: Battle-Ship :::"
+print "Let's play Battle Ship!!!  "
 time.sleep(0.5)
 print_board(BOARD)
 
