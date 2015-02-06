@@ -13,6 +13,7 @@ pygame.mixer.init()
 
 board = []
 BOARD_U = []
+<<<<<<< HEAD
 BOARD_U_2 = []
 
 BOARD_C = []
@@ -20,6 +21,12 @@ BOARD_C_2 = []
 
 BOARD_PLAYER_1 = []
 BOARD_PLAYER_2 = []
+=======
+BOARD_C = []
+BOARD_C_2 = []
+BOARD_PLAYER_2 = []
+
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
 SHIPS = {   "Aircraft Carrier" : 5,
             "Battleship" : 4,
             "Submarine" : 3,
@@ -86,7 +93,12 @@ def enter_col():
         except ValueError:
             print"Input coordinates in a range of 1 to 10   "
 
+<<<<<<< HEAD
 def place_user():
+=======
+def boat_user():
+    """Place the user boats  :::"""
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
     print """
        _                                            
  _ __ | | __ _  ___ ___   _   _  ___  _   _ _ __    
@@ -100,8 +112,26 @@ def place_user():
            \__ \ | | | | |_) \__ \  _ _ _           
            |___/_| |_|_| .__/|___/ (_|_|_)          
                        |_|                          """
+<<<<<<< HEAD
 def place_your_1():
     print """
+=======
+    for_def(BOARD_U)
+    for boat in SHIPS:
+        repeat = False
+        while repeat == False:
+            print "Where you want to place a  '"+ chr(27)+"[0;95m"+boat+chr(27)+"[0m"+ "'  of  '" +chr(27)+"[0;91m"+str(SHIPS[boat])+chr(27)+"[0m"+ "'   boxes ::: !!..."
+            boat_row = enter_row()
+            boat_col = enter_col()
+            boat_posi = ver_horiz()
+            if boat_posi == "h":
+                no_encounter = encounter_h(BOARD_U, SHIPS, boat, boat_row, boat_col)
+                if no_encounter != False:
+                    ship_Hori = hori(SHIPS, boat_row, boat_col, boat)
+                    hori(boat_row,boat_col, boat,SHIPS)
+                    clean()
+                    print """
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
        _                                            
  _ __ | | __ _  ___ ___   _   _  ___  _   _ _ __    
 | '_ \| |/ _` |/ __/ _ \ | | | |/ _ \| | | | '__|   
@@ -114,9 +144,21 @@ def place_your_1():
            \__ \ | | | | |_) \__ \  _ _ _           
            |___/_| |_|_| .__/|___/ (_|_|_)          
                        |_|                          """
+<<<<<<< HEAD
     print "Player 1 puts your ships"
 def place_your_2():
     print """
+=======
+                    print_board(BOARD_U)
+                    repeat = True
+            elif boat_posi == "v":
+                no_encounter2 = encounter_v(BOARD_U, SHIPS, boat, boat_row, boat_col)
+                if no_encounter2 != False:
+                    ship_vert = vertl(SHIPS, boat_row, boat_col)
+                    vertl(boat_row,boat_col, boat)
+                    clean()
+                    print """
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
        _                                            
  _ __ | | __ _  ___ ___   _   _  ___  _   _ _ __    
 | '_ \| |/ _` |/ __/ _ \ | | | |/ _ \| | | | '__|   
@@ -129,6 +171,7 @@ def place_your_2():
            \__ \ | | | | |_) \__ \  _ _ _           
            |___/_| |_|_| .__/|___/ (_|_|_)          
                        |_|                          """
+<<<<<<< HEAD
     print "Player 2 puts your ships"
 
 def boat_user():
@@ -158,6 +201,9 @@ def boat_user():
                     vertl(boat_row,boat_col, boat)
                     clean()
                     place_user()
+=======
+
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
                     print_board(BOARD_U)
                     repeat = True
     print "already positioned your ships"
@@ -165,6 +211,7 @@ def boat_user():
     print "------ It is time that the program position your ships to compertir with you"
     raw_input("\npress enter to place ...")
     boat_comp()
+<<<<<<< HEAD
 def boat_user_2():
     """Place the user boats  :::"""
     print"asdkfjdfjadskljdfkljdasf"
@@ -235,6 +282,9 @@ def boat_player_2():
     print "------ It is time that the program position your ships to compertir with you"
     raw_input("\npress enter to place ...")
     hit_player_1(board, boat)
+=======
+
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
 def defin_row():
     """Check the row value entered by the user  :::"""
     while (True):
@@ -270,6 +320,7 @@ def random_row():
 
 def random_col():
     return random.randint(0,9)
+<<<<<<< HEAD
 def hit_player_1(board, boat):
     print "Dispara... "
     print "este es el primer usuario"
@@ -306,6 +357,10 @@ def hit_player_1(board, boat):
 def hit_player_2(board, boat):
     print "este es el segundo jugador"
     guess_row = random_row()
+=======
+def hit_user_2(board, boat):
+        guess_row = random_row()
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
     guess_col = random_col()
     raw_input("\nDisparar...")
     DISPAROS.play()
@@ -313,30 +368,45 @@ def hit_player_2(board, boat):
     for coor in range(1):
         if BOARD_U[guess_row][guess_col] == "| A " or BOARD_U[guess_row][guess_col] == "| S " or BOARD_U[guess_row][guess_col] == "| B " or BOARD_U[guess_row][guess_col] == "| D " or BOARD_U[guess_row][guess_col] == "| P ":
             BOARD_U[guess_row][guess_col] = "| X "
+<<<<<<< HEAD
             BOARD_U_2[guess_row][guess_col] = "| X "
+=======
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
             ACIERTO.play()
         elif BOARD_C[guess_row][guess_col] == "| X " or BOARD_C[guess_row][guess_col]== "| + ":
             print chr(27)+"[0;91m"+" In this pocicion already placed a boat try again ... "+chr(27)+"[0m"
             hit_user_com(board,boat)
         else:
             BOARD_U[guess_row][guess_col] = "| + "
+<<<<<<< HEAD
             BOARD_U_2[guess_row][guess_col] = "| + "
+=======
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
             DESACIERTO.play()
         clean()
         print "   "
         print "This is the YOU board :::"
         print "   "
+<<<<<<< HEAD
         print_board(BOARD_U_2)
+=======
+        print_board(BOARD_U)
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
         statistics(BOARD_U)
         raw_input("\npress enter to place ...")
         clean()
         print "este es el tablero de la computadora "
         print "  "
+<<<<<<< HEAD
         print_board(BOARD_PLAYER_2)
     hit_player_1(board, boat)
 
 
 
+=======
+        print_board(BOARD_C_2)
+    hit_user(board, boat)
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
 
 def hit_user(board, boat):
     print "Dispara... "
@@ -350,6 +420,10 @@ def hit_user(board, boat):
             BOARD_C[guess_row][guess_col] = "| X "
             BOARD_C_2[guess_row][guess_col] = "| X "
             ACIERTO.play()
+<<<<<<< HEAD
+=======
+            play_again()
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
         elif BOARD_C[guess_row][guess_col] == "| X " or BOARD_C[guess_row][guess_col]== "| + ":
             print chr(27)+"[0;91m"+" In this pocicion already placed a boat try again ... "+chr(27)+"[0m"
             hit_user(board,boat)
@@ -485,6 +559,7 @@ def statistics(BOARD_C):
     print "  patrol:           2      ", patrol
 
     if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
+<<<<<<< HEAD
         you_lost()
 def you_lost():
     print """
@@ -495,6 +570,15 @@ def you_lost():
        ██║   ╚██████╔╝╚██████╔╝            ███████╗╚██████╔╝███████║   ██║      
        ╚═╝    ╚═════╝  ╚═════╝             ╚══════╝ ╚═════╝ ╚══════╝   ╚═╝      """
 
+=======
+        print """
+██╗   ██╗ ██████╗ ██╗   ██╗            ██╗      ██████╗ ███████╗████████╗   
+╚██╗ ██╔╝██╔═══██╗██║   ██║            ██║     ██╔═══██╗██╔════╝╚══██╔══╝   
+ ╚████╔╝ ██║   ██║██║   ██║            ██║     ██║   ██║███████╗   ██║      
+  ╚██╔╝  ██║   ██║██║   ██║            ██║     ██║   ██║╚════██║   ██║      
+   ██║   ╚██████╔╝╚██████╔╝            ███████╗╚██████╔╝███████║   ██║      
+   ╚═╝    ╚═════╝  ╚═════╝             ╚══════╝ ╚═════╝ ╚══════╝   ╚═╝      """
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
 def statistics_c(BOARD_U):
     count = 0
     aircraft = 0
@@ -525,6 +609,7 @@ def statistics_c(BOARD_U):
     print "  patrol:           2      ", patrol
 
     if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
+<<<<<<< HEAD
         you_win()
     def you_win():
         print """
@@ -573,6 +658,20 @@ def statistics_other(BOARD_PLAYER_1):
         you_win()
 
 
+=======
+        print """
+            ___             __    __   _____      __                
+    /\_/\  /___\ /\ /\     / / /\ \ \  \_   \  /\ \ \               
+    \_ _/ //  /// / \ \    \ \/  \/ /   / /\/ /  \/ /               
+     / \ / \_// \ \_/ /     \  /\  / /\/ /_  / /\  /                
+     \_/ \___/   \___/       \/  \/  \____/  \_\ \/                 
+                                                                    
+     _____           _____  __          ___    _              __    
+    /__   \  /\  /\  \_   \/ _\        / _ \  /_\    /\/\    /__\   
+      / /\/ / /_/ /   / /\/\ \        / /_\/ //_\\  /    \  /_\     
+     / /   / __  / /\/ /_  _\ \      / /_\\ /  _  \/ /\/\ \//__     
+     \/    \/ /_/  \____/  \__/      \____/ \_/ \_/\/    \/\__/     """
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
 def encounter_v2(board, new, boat, c_x, c_y):
     count = 0 
     try:
@@ -798,6 +897,7 @@ def vertl(c_x, c_y, boat):
         except:
             print "coordinate table is out of the ocean"
 
+<<<<<<< HEAD
 def hori1( c_x, c_y, boat,new):
     """characters placed horizontal boats  :::"""
     try:
@@ -822,6 +922,8 @@ def vertl1(c_x, c_y, boat):
         except:
             print "coordinate table is out of the ocean"
 
+=======
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
 def ver_horiz():
     """Check the orientation in which the user wishes to place the boats  :::"""
     print "Enter the orientation of ships:   "
@@ -998,7 +1100,10 @@ def menu():
                 name_user()
             elif chooseopt == 2:
                 clean()
+<<<<<<< HEAD
                 boat_user_2()
+=======
+>>>>>>> 4e1f5e27385a2fb77529e4ca38812a010aa21670
                 print board
             elif chooseopt == 3:
                 clean()
