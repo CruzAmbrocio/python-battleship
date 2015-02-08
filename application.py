@@ -982,30 +982,63 @@ X     ____                O   O   O   O   O   O      --<_>      )
 
 def instructions():
     """This is the game instructions"""
-    print"""
-Descripción
-Tableros
-Cada jugador maneja dos tableros divididos en casillas. Cada tablero     
-representa una zona diferente del mar abierto: la propia y la contraria. 
- En uno de los tableros, el jugador coloca sus barcos y registra los     
-  «tiros» del oponente; en el otro, se registran los tiros propios,      
-  al tiempo que se deduce la posición de los barcos del contrincantes    
-Naves                                                                    
-                                                                         
-                                                                         
-                                                                         
-                                                                         
-                                                                         
-    """
-    print "    "
-    print "Press - 1 - to go to the main menu :::   "
-    options = raw_input("Choose an options:  ")
+    print chr(27) + "[0;94m" + """
+             <<<< Battlehip >>>>                                    
+ was adapted to a single console view.                              
+         The game is in two forms:                                  
+Single Player:                                                      
+                                                                    
+You must compete with the program.                                  
+'You must place your ships so that the                              
+      program will be difficult to sink your bracos                 
+You must choose your coordinates in "X" and "Y"                     
+     numbers 1-10 choosing                                          
+     the orientation of your ships                                  
+-The Program randomly placed their boats                            
+-The Game takes a turn to you and other program                     
+-To Do shoot you must insert numbers                                
+     coordinates correspond to                                      
+     "X" and "Y" which is where you go to shoot                     
+-The Program makes his shot randomly trying to                      
+     find your ships                                                
+-In Each shift statistics will be shown in the                      
+     the amount shown                                               
+     of boxes that occupies the boat and you                        
+      You have given a shot.                                        
+You're wasting gave you to give without ships:                      """ + chr(27) + "[0m"
+
+    print"""                 -Ready:                                """
+    raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
+    clean()
+    print chr(27) + "[0;94m" + """
+                Multiplayer:                                        
+
+-In This mode will require two players                              
+      where they compete with each other:                           
+Each player must place your ships so                                
+     that his opponent is you                                       
+      difficult to sink the ships of another                        
+They must choose the coordinates "X" and "Y"                        
+     numbers 1-10 choosing                                          
+      orientation of their boats
+-The Program gives a turn to another player 1 and player 2          
+-To Shoot when they touch turn players                              
+     should add two numbers that correspond                         
+  to the coordinates "X" and "Y" indicating an                      
+      place on board where your shot is going.                      
+-In Each shift statistics will be shown in                          
+     where the number of squares shown                              
+      occupying the ship and you have given a shot.                 
+You're wasting your stay there first without boats:                 """ + chr(27) + "[0m"
+    print"""                 -Ready:                                """
+    print chr(27) + "[0;96m" + "Press - 1 - to go to the main menu :::   " + chr(27) + "[0m"
+    options = raw_input(chr(27) + "[0;96m" + "Choose an options:  " + chr(27) + "[0m")
     if options == "1":
         clean()
         menu()
     else:
         clean()
-        print chr(27)+"[0;91m"+" * Enter a valid option 4:   "+chr(27)+"[0m"
+        print chr(27) + "[0;91m"+"  <<< * Enter a valid option 4: >>>   " + chr(27)+"[0m"
         instructions()
 
 def menu():
@@ -1019,7 +1052,7 @@ def menu():
          \/    \/\___|_| |_|\__,_| (_|_|_)          
                                                     """
     """principal menu"""
-    time.sleep(0.03)
+    time.sleep(0.03) 
     print "What to do? ...  "
     time.sleep(0.03)
     print "Press - 1 - for single player :::   "
@@ -1102,7 +1135,7 @@ def name_user():
     print chr(27)+"[0;91m"+"""
              Now you must position your ships do it
 the strategic way you think it will be difficult to be sunk"""+chr(27)+"[0m"
-    raw_input("\nPress Enter to continue ...")
+    raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
     reset()
     boat_user()
 
@@ -1121,7 +1154,7 @@ def wel_multiplayer():
        \_____/\__,_|\__|\__|_|\___||___/_| |_|_| .__/       
                                                |_|          
                                                             """
-    raw_input("          Press Enter to continue ...")
+    raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
     reset()
     boat_player_1()
 
@@ -1136,8 +1169,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;91m"+""
-    print "█"*5
+                 ._|""" + chr(27) + "[0;91m" + " "
+    print "   "
+    print "█" * 5
     initial()
     clean()
     print"    "
@@ -1145,8 +1179,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;91m"+"☠"
-    print "█"*10
+                 ._|""" + chr(27) + "[0;91m" + "☠"
+    print "   "
+    print "█" * 10
     initial()
     clean()
     print"    "
@@ -1154,8 +1189,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;92m"+"☠ ☠"
-    print "█"*15
+                 ._|""" + chr(27) + "[0;92m" + "☠ ☠"
+    print "   "
+    print "█" * 15
     initial()
     clean()
     print"    "
@@ -1163,8 +1199,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;93m"+"☠ ☠ ☠"
-    print "█"*20
+                 ._|""" + chr(27) + "[0;93m" + "☠ ☠ ☠"
+    print "   "
+    print "█" * 20
     initial()
     clean()
     print"    "
@@ -1173,7 +1210,8 @@ def repeat_bar():
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
                  ._|"""
-    print "█"*25
+    print "   "
+    print "█" * 25
     initial()
     clean()
     print"    "
@@ -1181,7 +1219,8 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;96m"+"☠"
+                 ._|""" + chr(27) + "[0;96m" + "☠"
+    print "   "
     print "█"*30
     initial()
     clean()
@@ -1190,7 +1229,8 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;95m"+"☠ ☠"
+                 ._|""" + chr(27) + "[0;95m" + "☠ ☠"
+    print "   "
     print "█"*35
     initial()
     clean()
@@ -1199,8 +1239,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;96m"+"☠ ☠ ☠"
-    print "█"*40
+                 ._|""" + chr(27) + "[0;96m" + "☠ ☠ ☠"
+    print "   "
+    print "█" * 40
     initial()
     clean()
     print"    "
@@ -1209,7 +1250,8 @@ def repeat_bar():
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
                  ._|"""
-    print "█"*45
+    print "   "
+    print "█" * 45
     initial()
     clean()
     print"    "
@@ -1217,8 +1259,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;97m"+"☠"
-    print "█"*50
+                 ._|""" + chr(27) + "[0;97m" + "☠"
+    print "   "
+    print "█" * 50
     initial()
     clean()
     print"    "
@@ -1226,8 +1269,9 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;92m"+"☠ ☠"
-    print "█"*55
+                 ._|""" + chr(27) + "[0;92m" + "☠ ☠"
+    print "   "
+    print "█" * 55
     initial()
     clean()
     print"    "
@@ -1235,10 +1279,10 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""+chr(27)+"[0;94m"+"☠ ☠ ☠"
-    print "█"*60
+                 ._|""" + chr(27) + "[0;94m" + "☠ ☠ ☠"
+    print "   "
+    print "█" * 60
     initial()
     reset()
     menu()
-    MENU.play(-1)
 repeat_bar()
