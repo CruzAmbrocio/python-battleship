@@ -362,16 +362,16 @@ def hit_player_2(board, boat):
             DESACIERTO.play()
         clean()
         print "   "
-        print "            This is the PLAYER 2 board :::"
+        print "            This is the PLAYER 1 board :::"
         print "   "
         print_board(BOARD_PLAYER_1_A)
-        statistics_2(BOARD_PLAYER_1)
+        statistics_2(BOARD_PLAYER_2)
         raw_input("\npress enter to place ...")
         clean()
         print "este es el tablero del jugador 2"
         print "  "
         print_board(BOARD_PLAYER_2_A)
-    hit_player_2(board, boat)
+    hit_player_1(board, boat)
 
 def hit_player_1(board, boat):
     print "Dispara... 1"
@@ -399,7 +399,7 @@ def hit_player_1(board, boat):
         print "            This is the PLAYER 2 board :::"
         print "   "
         print_board(BOARD_PLAYER_2_A)
-        statistics_2(BOARD_PLAYER_2)
+        statistics_1(BOARD_PLAYER_1)
         raw_input("\npress enter to place ...")
         clean()
         print "este es el tablero del jugador 1"
