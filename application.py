@@ -35,13 +35,15 @@ LETTER = {   "Aircraft Carrier" : "| A ",
              "Destroyer" : "| D ",
              "Patrol Boat" : "| P "}
 
-TAMBORES = pygame.mixer.Sound("TAMBORES.wav")
-SINGLE = pygame.mixer.Sound("FONDO.wav")
-MENU = pygame.mixer.Sound("MUNU.wav")
-MUCHOS = pygame.mixer.Sound("MUCHOS.wav")
+WELCOME = pygame.mixer.Sound("WELCOME.wav")
+LOADING = pygame.mixer.Sound("LOADING.wav")
+SINGLE = pygame.mixer.Sound("SINGLE.wav")
+MULTIPLAYER = pygame.mixer.Sound("MULTIPLAYER.wav")
+MENU = pygame.mixer.Sound("MENU.wav")
 ACIERTO = pygame.mixer.Sound("ACIERTO.wav")
 DESACIERTO = pygame.mixer.Sound("DISPAGUA.wav")
 DISPAROS = pygame.mixer.Sound("DISPAROS.wav")
+GAMEOVER = pygame.mixer.Sound("GAMEOVER.wav")
 
 def for_def(board):
     """Define measures the board  :::"""
@@ -149,8 +151,8 @@ def boat_player_1():
     clean()
     place_user()
     print chr(27)+"[0;96m" + """      Player 1 puts your ships 
-        °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-                                                    """
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+                                                    """+chr(27)+"[0m"
     for_def(BOARD_PLAYER_1)
     for boat in SHIPS:
         repeat = False
@@ -167,8 +169,8 @@ def boat_player_1():
                     clean()
                     place_user()
                     print chr(27)+"[0;96m" + """      Player 1 puts your ships 
-                        °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-                                                                    """
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+                                                                    """+chr(27)+"[0m"
                     print_board(BOARD_PLAYER_1)
                     repeat = True
             elif boat_posi == "v":
@@ -179,7 +181,7 @@ def boat_player_1():
                     clean()
                     place_user()
                     print chr(27)+"[0;96m" + """      Player 1 puts your ships 
-                        °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                     """+chr(27)+"[0m"
                     print_board(BOARD_PLAYER_1)
                     repeat = True
@@ -196,8 +198,8 @@ def boat_player_2():
     for_def(BOARD_PLAYER_2_A)
     clean()
     place_user()
-    print chr(27)+"[0;93m" + """      Player 1 puts your ships 
-        °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    print chr(27)+"[0;93m" + """      Player 2 puts your ships 
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                     """+chr(27)+"[0m"
     for_def(BOARD_PLAYER_2)
     for boat in SHIPS:
@@ -215,7 +217,7 @@ def boat_player_2():
                     clean()
                     place_user()
                     print chr(27)+"[0;93m" + """      Player 2 puts your ships 
-                        °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                     """+chr(27)+"[0m"
                     print_board(BOARD_PLAYER_2)
                     repeat = True
@@ -226,8 +228,8 @@ def boat_player_2():
                     vertl2(boat_row,boat_col, boat)
                     clean()
                     place_user()
-                    print chr(27)+"[0;93m" + """      Player 1 puts your ships 
-                        °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+                    print chr(27)+"[0;93m" + """      Player 2 puts your ships 
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                     """+chr(27)+"[0m"
                     print_board(BOARD_PLAYER_2)
                     repeat = True
@@ -236,16 +238,12 @@ def boat_player_2():
     raw_input("\n<<<<< Press enter to continue ...   >>>>>")
     clean()
     print "   "
-    print chr(27)+"[0;92m" + "<<<<< This is the PLAYER 2 board ::: >>>>>"+chr(27)+"[0m"
+    print chr(27)+"[0;93m" + "<<<<< This is the PLAYER 2 board ::: >>>>>"+chr(27)+"[0m"
     print "   "
     print_board(BOARD_PLAYER_2_A)
     hit_player_1(board, boat)
     raw_input("\n<<<<< Press enter to place ...   >>>>>")
     statistics_c(BOARD_U)
-
-
-
-
 
 def defin_row():
     """Check the row value entered by the system   :::"""
@@ -353,10 +351,13 @@ def hit_user_com(board, boat):
 
 
 def hit_player_2(board, boat):
-    print "Dispara...2 "
+    print "Enter the coordinates where you want to shoot ....  "
+    print "   "
+    print "   "
+    print chr(27) + "[0;93m" + "PLAYER 2 shooting :::" + chr(27) + "[0m"
     guess_row = enter_row()
     guess_col = enter_col()
-    raw_input("\nDisparar...2")
+    raw_input(chr(27) + "[0;93m" + "\nShoot ...." + chr(27) + "[0m")
     DISPAROS.play()
     time.sleep(0.4)
     for coor in range(1):
@@ -375,13 +376,13 @@ def hit_player_2(board, boat):
             DESACIERTO.play()
         clean()
         print "   "
-        print "            This is the PLAYER 1 board :::"
+        print chr(27) + "[0;96m" + "            This is the PLAYER 1 board :::" + chr(27) + "[0m"
         print "   "
         print_board(BOARD_PLAYER_1_A)
         statistics_2(BOARD_PLAYER_2)
-        raw_input("\npress enter to place ...")
+        raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
         clean()
-        print "este es el tablero del jugador 2"
+        print chr(27) + "[0;93m" + "            This is the PLAYER 2 board :::" + chr(27) + "[0m"
         print "  "
         print_board(BOARD_PLAYER_2_A)
     hit_player_1(board, boat)
@@ -389,9 +390,12 @@ def hit_player_2(board, boat):
 def hit_player_1(board, boat):
     """Here the shooting player 1 are made and validated"""
     print "Enter the coordinates where you want to shoot ....  "
+    print "   "
+    print "   "
+    print chr(27) + "[0;96m" + "PLAYER 1 shooting :::" + chr(27) + "[0m"
     guess_row=  enter_row()
     guess_col= enter_col()
-    raw_input("\nShoot ....")
+    raw_input(chr(27) + "[0;96m" + "\nShoot ...." + chr(27) + "[0m")
     DISPAROS.play()
     time.sleep(0.4)
     for coor in range(1):
@@ -412,52 +416,52 @@ def hit_player_1(board, boat):
             DESACIERTO.play()
         clean()
         print "   "
-        print chr(27) + "[0;92m" + "            This is the PLAYER 2 board :::" + chr(27) + "[0m"
+        print chr(27) + "[0;93m" + "            This is the PLAYER 2 board :::" + chr(27) + "[0m"
         print "   "
         print_board(BOARD_PLAYER_2_A)
         statistics_1(BOARD_PLAYER_1)
-        raw_input("\npress enter to place ...")
+        raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
         clean()
-        print "este es el tablero del jugador 1"
+        print chr(27) + "[0;96m" + "            This is the PLAYER 2 board :::" + chr(27) + "[0m"
         print "  "
         print_board(BOARD_PLAYER_1_A)
     hit_player_2(board, boat)
 
-def play_again():
-    count = 0
-    while count != 10:
-        for col in range(9):
-            if " A " in BOARD_U[count][col]:
-                del BOARD_U[count][col]
-            if " B " in BOARD_U[count][col]:
-                del BOARD_U[count][col]
-            if " D " in BOARD_U[count][col]:
-                del BOARD_U[count][col]
-            if " S " in BOARD_U[count][col]:
-                del BOARD_U[count][col]
-            if " P " in BOARD_U[count][col]:
-                del BOARD_U[count][col]
-            if " A " in BOARD_C[count][col]:
-                del BOARD_C[count][col]
-            if " B " in BOARD_C[count][col]:
-                del BOARD_C[count][col]
-            if " D " in BOARD_C[count][col]:
-                del BOARD_C[count][col]
-            if " S " in BOARD_C[count][col]:
-                del BOARD_C[count][col]
-            if " P " in BOARD_C[count][col]:
-                del BOARD_C[count][col]
-            if " A " in BOARD_C_2[count][col]:
-                del BOARD_C_2[count][col]
-            if " B " in BOARD_C_2[count][col]:
-                del BOARD_C_2[count][col]
-            if " D " in BOARD_C_2[count][col]:
-                del BOARD_C_2[count][col]
-            if " S " in BOARD_C_2[count][col]:
-                del BOARD_C_2[count][col]
-            if " P " in BOARD_C_2[count][col]:
-                del BOARD_C_2[count][col]
-        count += 1
+def play_again(BOARD_U, BOARD_C, BOARD_C_2, BOARD_PLAYER_1, BOARD_PLAYER_1_A, BOARD_PLAYER_2, BOARD_PLAYER_2_A):
+    """to replay cleaning boards"""
+    board1 = 1
+    board2 = 2
+    board3 = 3
+    board4 = 4
+    board5 = 5
+    board6 = 6
+    board7 = 7
+    if board1 > 0:
+        for count in range(board1):
+            del BOARD_U[0]
+
+    if board2 > 0:
+        for count in range(board2):
+            del BOARD_C[0]
+
+    if board3 > 0:
+        for count in range(board3):
+            del BOARD_C_2[0]
+
+    if board4 > 0:
+        for count in range(board4):
+            del BOARD_PLAYER_1[0]
+
+    if board5 > 0:
+        for count in range(board5):
+            del BOARD_PLAYER_1_A[0]
+
+    if board6 > 0:
+        for count in range(board6):
+            del BOARD_PLAYER_2[0]
+    if board6 > 0:
+        for count in range(board6):
+            del BOARD_PLAYER_2_A[0]
     print """
    ___ _                                 _                  
   / _ \ | __ _ _   _    __ _  __ _  __ _(_)_ __    _ _ _    
@@ -466,30 +470,53 @@ def play_again():
 \/    |_|\__,_|\__, |  \__,_|\__, |\__,_|_|_| |_| (_|_|_)   
                |___/         |___/                          """
     print "You want to do:   "
-    print "presiona - 1 - para juegar de nuevo "
-    print "presiona - 2 - para regresar al menu principal"
-    BOARD_PLAYER_2_A
-    if reply == "1":
-        name_user()
-    elif reply == "2":
-        menu()
-    else:
+    print "presiona - 1 - para juegar silgle player"
+    print "presiona - 2 - para jugar multiplayer"
+    print "presiona - 3 - para regresar al menu principal"
+    try:
+        repply = int(raw_input("Choose an option:  "))
+        if reply == 1:
+            name_user()
+        elif reply == 2:
+            menu()
+        elif reply == 3:
+            menu()
+        elif chooseopt <= 0:
+            print chr(27)+"[0;91m"+" * Enter a valid option :   "+chr(27)+"[0m"
+        elif chooseopt > 3:
+            print chr(27)+"[0;91m"+" * Enter a valid option :   "+chr(27)+"[0m"
+    except ValueError:
         print chr(27)+"[0;91m"+" * Enter a valid option :   "+chr(27)+"[0m"
-
         play_again()
 
 def you_lost():
+    """game over printed message"""
+    GAMEOVER.play()
     print """
     ██╗   ██╗ ██████╗ ██╗   ██╗            ██╗      ██████╗ ███████╗████████╗   
     ╚██╗ ██╔╝██╔═══██╗██║   ██║            ██║     ██╔═══██╗██╔════╝╚══██╔══╝   
      ╚████╔╝ ██║   ██║██║   ██║            ██║     ██║   ██║███████╗   ██║      
       ╚██╔╝  ██║   ██║██║   ██║            ██║     ██║   ██║╚════██║   ██║      
        ██║   ╚██████╔╝╚██████╔╝            ███████╗╚██████╔╝███████║   ██║      
-       ╚═╝    ╚═════╝  ╚═════╝             ╚══════╝ ╚═════╝ ╚══════╝   ╚═╝      """
-    raw_input("\npress enter to continue ...")
-    play_again()
+       ╚═╝    ╚═════╝  ╚═════╝             ╚══════╝ ╚═════╝ ╚══════╝   ╚═╝      
 
+             ██████╗  █████╗ ███╗   ███╗███████╗           
+            ██╔════╝ ██╔══██╗████╗ ████║██╔════╝           
+            ██║  ███╗███████║██╔████╔██║█████╗             
+            ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝             
+            ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗           
+             ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝           
+                                                           
+             ██████╗ ██╗   ██╗███████╗██████╗              
+            ██╔═══██╗██║   ██║██╔════╝██╔══██╗             
+            ██║   ██║██║   ██║█████╗  ██████╔╝             
+            ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗             
+            ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║    ██╗██╗██╗
+             ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚═╝╚═╝╚═╝
+                                                           
+                                                           """
 def statistics(BOARD_C):
+    """computer prints statistics"""
     count = 0
     aircraft = 0
     battleship = 0
@@ -518,10 +545,11 @@ def statistics(BOARD_C):
     print "  destroyer:        3      " + chr(27) + "[0;91m" + str(destroyer) + chr(27) + "[0m"
     print "  patrol:           2      " + chr(27) + "[0;91m" + str(patrol) + chr(27) + "[0m"
     if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
-        SINGLE.pause()
+        GAMEOVER.play()
         you_lost()
 
 def you_win():
+    """prints the message that the user won"""
     print """
             ___             __    __   _____      __                
     /\_/\  /___\ /\ /\     / / /\ \ \  \_   \  /\ \ \               
@@ -538,6 +566,7 @@ def you_win():
     play_again()
 
 def statistics_c(BOARD_U):
+    """computer prints statistics"""
     count = 0
     aircraft = 0
     battleship = 0
@@ -570,6 +599,7 @@ def statistics_c(BOARD_U):
         you_win()
 
 def statistics_1(BOARD_PLAYER_1):
+    """Prints statistics for player 1"""
     count = 0
     aircraft = 0
     battleship = 0
@@ -598,9 +628,23 @@ def statistics_1(BOARD_PLAYER_1):
     print "  destroyer:        3      " + chr(27) + "[0;91m" + str(destroyer) + chr(27) + "[0m"
     print "  patrol:           2      " + chr(27) + "[0;91m" + str(patrol) + chr(27) + "[0m"
     if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
-        you_lost()
+        print """
+██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗     ██████╗    
+██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ╚════██╗   
+██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝     █████╔╝   
+██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗    ██╔═══╝    
+██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║    ███████╗   
+╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝    ╚══════╝   
+                                                                
+            ██╗    ██╗██╗███╗   ██╗███████╗                     
+            ██║    ██║██║████╗  ██║██╔════╝                     
+            ██║ █╗ ██║██║██╔██╗ ██║███████╗                     
+            ██║███╗██║██║██║╚██╗██║╚════██║                     
+            ╚███╔███╔╝██║██║ ╚████║███████║                     
+             ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝                     """
 
 def statistics_2(BOARD_PLAYER_2):
+    """Prints statistics for player 2"""
     count = 0
     aircraft = 0
     battleship = 0
@@ -629,9 +673,23 @@ def statistics_2(BOARD_PLAYER_2):
     print "  destroyer:        3      " + chr(27) + "[0;91m" + str(destroyer) + chr(27) + "[0m"
     print "  patrol:           2      " + chr(27) + "[0;91m" + str(patrol) + chr(27) + "[0m"
     if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
-        you_lost()
+        print """
+██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗      ██╗   
+██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ███║   
+██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝    ╚██║   
+██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗     ██║   
+██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║     ██║   
+╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝     ╚═╝   
+                                                            
+            ██╗    ██╗██╗███╗   ██╗███████╗                 
+            ██║    ██║██║████╗  ██║██╔════╝                 
+            ██║ █╗ ██║██║██╔██╗ ██║███████╗                 
+            ██║███╗██║██║██║╚██╗██║╚════██║                 
+            ╚███╔███╔╝██║██║ ╚████║███████║                 
+             ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝                 """
 
 def boat_comp_ready():
+    """ print message that the computer positioned its boats """
     print chr(27) + "[0;92m" + """
             ___                     _          
            / __\ ___   __ _ _ __ __| |         
@@ -709,6 +767,7 @@ def boat_comp():
 
 
 def ready():
+    """printed message all ready to play"""
     clean()
     print"""
        _     _ _                      _         _           
@@ -724,12 +783,12 @@ def ready():
                | .__/|_|\__,_|\__, |  (_|_|_)               
                |_|            |___/                         
                                                             """
-    raw_input("\npress enter to place ...")
+    raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
     clean()
     print "   "
     print_board(BOARD_PLAYER_2_A)
     hit_player_1(board, boat)
-    raw_input("\npress enter to place ...")
+    raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
     statistics_2(BOARD_PLAYER_2)
 
 
@@ -743,8 +802,7 @@ def horizon_comp( c_x, c_y, boat,new):
             for coor in range(SHIPS[boat]):
                 BOARD_C[c_x][c_y + coor] = "|   "
         except:
-            print "coordinate table is out of the ocean"
-
+            print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>" + chr(27) + "[0m"
 def vertical_comp(c_x, c_y, boat):
     """characters placed vertically boats  :::"""
     try:
@@ -755,7 +813,7 @@ def vertical_comp(c_x, c_y, boat):
             for coor in range(SHIPS[boat]):
                 BOARD_C[c_x + coor][c_y] = "|   "
         except:
-            print "coordinate table is out of the ocean"
+            print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>" + chr(27) + "[0m"
 
 def ver_horiz_aleat():
     """Check the orientation in which the user wishes to place the boats  :::"""
@@ -775,7 +833,7 @@ def ver_horiz_aleat():
         else:
             print ""
             print "Enter valid characters"
-
+            print chr(27) + "[0;9m" + "\n<<<<< Enter valid characters   >>>>>" + chr(27) + "[0m"
 def encounter_v(board, new, boat, c_x, c_y):
     count = 0 
 
@@ -784,12 +842,12 @@ def encounter_v(board, new, boat, c_x, c_y):
             if "|   " in board[c_x + thing][c_y]:
                 count += 1 
     except: 
-        print "There is already a boat here insert new coordinates"
+        print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>" + chr(27) + "[0m"
         return False
     if count == new[boat]: 
         return True
     else: 
-        print "There is already a boat here insert new coordinates"
+        print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>" + chr(27) + "[0m"
         return False 
 
 def encounter_h(board,new, boat, c_x, c_y):
@@ -799,12 +857,12 @@ def encounter_h(board,new, boat, c_x, c_y):
             if "|   " in board[c_x][c_y + thing]:
                 count += 1 
     except: 
-        print "There is already a boat here insert new coordinates"
+        print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>" + chr(27) + "[0m"
         return False
     if count == new[boat]: 
         return True
     else: 
-        print "There is already a boat here insert new coordinates"
+        print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>" + chr(27) + "[0m"
         return False 
 
 def hori( c_x, c_y, boat,new):
@@ -817,8 +875,7 @@ def hori( c_x, c_y, boat,new):
             for coor in range(SHIPS[boat]):
                 BOARD_U[c_x + coor][c_y] = "|   "
         except:
-            print "coordinate table is out of the ocean"
-
+            print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>" + chr(27) + "[0m"
 def vertl(c_x, c_y, boat):
     """characters placed vertically boats  :::"""
     try:
@@ -829,7 +886,7 @@ def vertl(c_x, c_y, boat):
             for coor in range(SHIPS[boat]):
                 BOARD_U[c_x + coor][c_y] = "|   "
         except:
-            print "coordinate table is out of the ocean"
+            print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>" + chr(27) + "[0m"
 
 def hori1( c_x, c_y, boat,new):
     """characters placed horizontal boats  :::"""
@@ -895,6 +952,7 @@ def ver_horiz():
         else:
             print ""
             print "Enter valid characters"
+        print chr(27) + "[0;9m" + "\n<<<<< Enter valid characters v/h   >>>>>" + chr(27) + "[0m"
 
 def clean():
     """Used to clean the screen"""
@@ -905,6 +963,18 @@ def reset():
     """Used to reset the screen"""
     reset=lambda: os.system ("reset")
     reset()
+
+def exit():
+    clean()
+    print chr(27)+"[5;96m"+"""
+     ☻ /     
+    /█      
+    / \     
+    Bye ::: ...
+        """+chr(27)+"[0m"
+    time.sleep(2)
+    reset()
+    os.system("exit")
 
 def welcome():
     """This is the first image of the game"""
@@ -921,40 +991,30 @@ def welcome():
             .::::88::::::::::::Y88888P::::::::::::88::::            
             :::::Y8baaaaaaaaaa88P:T:Y88aaaaaaaaaad8P:::::           
             :::::::Y88888888888P::|::Y88888888888P:::::::           
-            ::::::::::::::::888:::|:::888::::::::::::::::           
-            `:::::::::::::::8888888888888b::::::::::::::'           
+            ::::::::::::::::888:::|:::8888:::::::::::::::           
+            `:::::::::::::::88888888888888::::::::::::::'           
              :::::::::::::::88888888888888::::::::::::::            
-              :::::::::::::d88888888888888:::::::::::::             
-               ::::::::::::88::88:::88::88::::::::::::              
-                `::::::::::88::88:::88::88::::::::::'               
-                  `::::::::88::88:::88::88::::::::'                 
-                    `::::::88::88:::88::88::::::'                   
+              ::::::::::::::88888888888888:::::::::::::             
+               :::::::::::::88::88::88::88::::::::::::              
+                `:::::::::::88::88::88::88::::::::::'               
+                  `:::::::::88::88::88::88::::::::'                 
+                    `:::::::88::88::88::88::::::'                   
       ___          _     _     _              _      _              
      | _ )  __ _  | |_  | |_  | |  ___   ___ | |_   (_)  _ __  ™    
      | _ \ / _` | |  _| |  _| | | / -_) (_-< | ' \  | | | '_ \      
      |___/ \__,_|  \__|  \__| |_| \___| /__/ |_||_| |_| | .__/      
                                                         |_|         """
+
     time.sleep(0.7)
 
 def color_wel():
     """To change color to welcome"""
     clean()
     welcome()
-    clean()
-    print"    "
-    print"    "+chr(27)+"[0;92m"+""
-    welcome()
+    WELCOME.play()
     clean()
     print"    "
     print"    "+chr(27)+"[0;95m"+""
-    welcome()
-    clean()
-    print"    "
-    print"    "+chr(27)+"[0;91m"+""
-    welcome()
-    clean()
-    print"    "
-    print"    "+chr(27)+"[0;96m"+""
     welcome()
     clean()
 color_wel()
@@ -978,10 +1038,11 @@ def initial():
  |   \____-------/                                      _    ☠ \     
 X     ____                O   O   O   O   O   O      --<_>      )    
  |__ /    -------\____________________________________________ /     """
-    time.sleep(0.5)
+    time.sleep(0.8)
 
 def instructions():
     """This is the game instructions"""
+    clean()
     print chr(27) + "[0;94m" + """
              <<<< Battlehip >>>>                                    
  was adapted to a single console view.                              
@@ -1041,70 +1102,99 @@ You're wasting your stay there first without boats:                 """ + chr(27
         print chr(27) + "[0;91m"+"  <<< * Enter a valid option 4: >>>   " + chr(27)+"[0m"
         instructions()
 
-def menu():
-    """this is principal menu"""
-    chooseopt = 0
-    MENU.play().set_volume(0.1)
+def by():
+    """about the game"""
+    clean()
     print """
+ ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗██████╗     ██████╗ ██╗   ██╗      
+██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝██╔══██╗    ██╔══██╗╚██╗ ██╔╝██╗   
+██║     ██████╔╝█████╗  ███████║   ██║   █████╗  ██║  ██║    ██████╔╝ ╚████╔╝ ╚═╝   
+██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝  ██║  ██║    ██╔══██╗  ╚██╔╝  ██╗   
+╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗██████╔╝    ██████╔╝   ██║   ╚═╝   
+ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═════╝     ╚═════╝    ╚═╝         
+                                                                                    
+                         ██████╗██████╗ ██╗   ██╗███████╗                           
+                        ██╔════╝██╔══██╗██║   ██║╚══███╔╝                           
+                        ██║     ██████╔╝██║   ██║  ███╔╝                            
+                        ██║     ██╔══██╗██║   ██║ ███╔╝                             
+                        ╚██████╗██║  ██║╚██████╔╝███████╗                           
+                         ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝                           
+                                                                                    
+         █████╗ ███╗   ███╗██████╗ ██████╗  ██████╗  ██████╗██╗ ██████╗             
+        ██╔══██╗████╗ ████║██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║██╔═══██╗            
+        ███████║██╔████╔██║██████╔╝██████╔╝██║   ██║██║     ██║██║   ██║            
+        ██╔══██║██║╚██╔╝██║██╔══██╗██╔══██╗██║   ██║██║     ██║██║   ██║            
+        ██║  ██║██║ ╚═╝ ██║██████╔╝██║  ██║╚██████╔╝╚██████╗██║╚██████╔╝            
+        ╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝ ╚═════╝             
+          ___          _     _     _              _      _                          
+         | _ )  __ _  | |_  | |_  | |  ___   ___ | |_   (_)  _ __                   
+         | _ \ / _` | |  _| |  _| | | / -_) (_-< | ' \  | | | '_ \                  
+         |___/ \__,_|  \__|  \__| |_| \___| /__/ |_||_| |_| | .__/                  
+                                                            |_|                     
+                                                                                    """ 
+
+
+
+
+
+def validated(option):
+
+    dic_menu = {"1": name_user,  "2": wel_multiplayer, "3": instructions, "4": by, "5": exit}
+    count = 0
+
+    if option in dic_menu:
+        clean()
+        return dic_menu[option]
+    else:
+        print ""
+        print chr(27)+"[0;91m"+" * Enter a valid option 3:   "+chr(27)+"[0m"
+        print ""
+        return self.menu
+
+
+
+def menu():
+    LOADING.stop()
+    MENU.play()
+    reply = False
+    while reply == False:
+        print """
            /\/\   ___ _ __  _   _                   
  _____    /    \ / _ \ '_ \| | | |          _____   
 |_____|  / /\/\ \  __/ | | | |_| |  _ _ _  |_____|  
          \/    \/\___|_| |_|\__,_| (_|_|_)          
-                                                    """
-    """principal menu"""
-    time.sleep(0.03) 
-    print "What to do? ...  "
-    time.sleep(0.03)
-    print "Press - 1 - for single player :::   "
-    time.sleep(0.03)
-    print "Press - 2 - for multiplayer :::   "
-    time.sleep(0.03)
-    print "Press - 3 - for instructions :::   "
-    time.sleep(0.03)
-    print "Press - 4 - about:::   "
-    time.sleep(0.03)
-    print "Press - 5 - to exit the game :::   "
-    time.sleep(0.03)
-    print "     "
-    time.sleep(0.03)
-    while chooseopt != 5:
-        try:
-            chooseopt = int(raw_input("Choose an option:  "))
-            if chooseopt == 5:
-                clean()
-                print chr(27)+"[5;96m"+"""
-                 ☻ /     
-                /█      
-                / \     
-                Bye ::: ...
-                    """+chr(27)+"[0m"
-                time.sleep(2)
-                reset()
-                sys.exit(1)
-            elif chooseopt == 1:
-                clean()
-                name_user()
-            elif chooseopt == 2:
-                clean()
-                wel_multiplayer()
-                print board
-            elif chooseopt == 3:
-                clean()
-                instructions()
-            elif chooseopt == 4:
-                clean()
-            elif chooseopt <= 0:
-                print chr(27)+"[0;91m"+" * Enter a valid option 1:   "+chr(27)+"[0m"
-            elif chooseopt > 5:
-                print chr(27)+"[0;91m"+" * Enter a valid option 2:   "+chr(27)+"[0m"
-        except ValueError:
-            print chr(27)+"[0;91m"+" * Enter a valid option 3:   "+chr(27)+"[0m"
+                                                    
+
+        principal menu"""
+        time.sleep(0.03)
+        print "What to do? ...  "
+        time.sleep(0.03)
+        print "Press - 1 - for single player :::   "
+        time.sleep(0.03)
+        print "Press - 2 - for multiplayer :::   "
+        time.sleep(0.03)
+        print "Press - 3 - for instructions :::   "
+        time.sleep(0.03)
+        print "Press - 4 - about:::   "
+        time.sleep(0.03)
+        print "Press - 5 - to exit the game :::   "
+        time.sleep(0.03)
+        print "     "
+        time.sleep(0.03)
+        option = raw_input(" Choose an option::: ")
+        reply = validated(option)
+        reply()
+        break
+
+
 
 
 
 def name_user():
     """This is a user name """
-    SINGLE.play(5)
+    clean()
+    MENU.stop()
+    SINGLE.play(10)
     print """
            ___       _   _   _           _     _      ™   
           / __\ __ _| |_| |_| | ___  ___| |__ (_)_ __     
@@ -1140,7 +1230,10 @@ the strategic way you think it will be difficult to be sunk"""+chr(27)+"[0m"
     boat_user()
 
 def wel_multiplayer():
-    print"""
+    clean()
+    MENU.stop
+    MULTIPLAYER.play(20)
+    print chr(27) + "[0;91m" + """
                   _ _   _       _                           
       /\/\  _   _| | |_(_)_ __ | | __ _ _   _  ___ _ __     
      /    \| | | | | __| | '_ \| |/ _` | | | |/ _ \ '__|    
@@ -1153,7 +1246,7 @@ def wel_multiplayer():
        / \/  \ (_| | |_| |_| |  __/\__ \ | | | | |_) |      
        \_____/\__,_|\__|\__|_|\___||___/_| |_|_| .__/       
                                                |_|          
-                                                            """
+                                                            """  + chr(27) + "[0m"
     raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
     reset()
     boat_player_1()
@@ -1161,6 +1254,7 @@ def wel_multiplayer():
 
 def repeat_bar():
     """This is the bar to load the game"""
+    LOADING.play()
     clean()
     welcome()
     reset()
@@ -1209,7 +1303,7 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""
+                 ._|""" + chr(27) + "[0;91m" + " "
     print "   "
     print "█" * 25
     initial()
@@ -1249,7 +1343,7 @@ def repeat_bar():
     print """
 |    _  _. _|*._  _ 
 |___(_)(_](_]|[ )(_]
-                 ._|"""
+                 ._|""" + chr(27) + "[0;91m" + " "
     print "   "
     print "█" * 45
     initial()
@@ -1281,8 +1375,8 @@ def repeat_bar():
 |___(_)(_](_]|[ )(_]
                  ._|""" + chr(27) + "[0;94m" + "☠ ☠ ☠"
     print "   "
-    print "█" * 60
+    print "█" * 60  + chr(27) + "[0m"
     initial()
-    reset()
+    clean()
     menu()
 repeat_bar()
