@@ -68,30 +68,44 @@ class battleship(object):
     def enter_row(self):
         """Check the row value entered by the user  :::"""
         while (True):
-            try:
-                guess_row = int(raw_input(chr(27) + "[0;94m" + "Enter the row:   " + chr(27) + "[0m"))
-                if guess_row >=1 and guess_row <=10:
-                    guess_row -=1
-                    return guess_row
-                    break
-                else:
-                    print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean   " + chr(27) + "[0m"
-            except ValueError:
-                print chr(27) + "[0;91m" + "Input coordinates in a range of 1 to 10   " + chr(27) + "[0m"
+            guess_row = raw_input(chr(27) + "[0;94m" + "Enter the row:   " + chr(27) + "[0m")
+            if guess_row == "exit":
+                self.clean()
+                self.clean_board(self.BOARD_U, self.BOARD_C, self.BOARD_C_2, self.BOARD_PLAYER_1, self.BOARD_PLAYER_1_A, self.BOARD_PLAYER_2, self.BOARD_PLAYER_2_A)
+                self.menu()
+                break
+            else:
+                try:
+                    guess_row = int(guess_row)
+                    if guess_row >=1 and guess_row <=10:
+                        guess_row -=1
+                        return guess_row
+                        break
+                    else:
+                        print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean   " + chr(27) + "[0m"
+                except ValueError:
+                    print chr(27) + "[0;91m" + "Input coordinates in a range of 1 to 10   " + chr(27) + "[0m"
 
     def enter_col(self):
         """Check the column value entered by the user  :::"""
         while (True):
-            try:
-                guess_col = int(raw_input(chr(27) + "[0;94m" + "Enter the column:   " + chr(27) + "[0m"))
-                if guess_col >=1 and guess_col <=10:
-                    guess_col -=1
-                    return guess_col
-                    break
-                else:
-                    print "[0;91m" + "This coordinate does not exist in the ocean   " + chr(27)+"[0m"
-            except ValueError:
-                print chr(27) + "[0;91m" + "Input coordinates in a range of 1 to 10   " + chr(27)+"[0m"
+            guess_col = raw_input(chr(27) + "[0;94m" + "Enter the column:   " + chr(27) + "[0m")
+            if guess_col == "exit":
+                self.clean()
+                self.clean_board(self.BOARD_U, self.BOARD_C, self.BOARD_C_2, self.BOARD_PLAYER_1, self.BOARD_PLAYER_1_A, self.BOARD_PLAYER_2, self.BOARD_PLAYER_2_A)
+                self.menu()
+                break
+            else:
+                try:
+                    guess_col = int(guess_col)
+                    if guess_col >=1 and guess_col <=10:
+                        guess_col -=1
+                        return guess_col
+                        break
+                    else:
+                        print "[0;91m" + "This coordinate does not exist in the ocean   " + chr(27)+"[0m"
+                except ValueError:
+                    print chr(27) + "[0;91m" + "Input coordinates in a range of 1 to 10   " + chr(27)+"[0m"
 
     def place_user(self):
         print chr(27) + "[0;96m" + """
@@ -386,7 +400,7 @@ class battleship(object):
             print chr(27) + "[0;93m" + "            This is the PLAYER 2 board :::" + chr(27) + "[0m"
             print "  "
             self.print_board(self.BOARD_PLAYER_2_A)
-        self.play_again()
+            self.hit_player_1(board, boat)
 
     def hit_player_1(self,board, boat):
         """Here the shooting player 1 are made and validated"""
@@ -428,17 +442,6 @@ class battleship(object):
             self.print_board(self.BOARD_PLAYER_1_A)
         self.hit_player_2(board, boat)
 
-        self.board = []
-        self.BOARD_U = []
-
-        self.BOARD_C = []
-        self.BOARD_C_2 = []
-
-        self.BOARD_PLAYER_1 = []
-        self.BOARD_PLAYER_1_A = []
-
-        self.BOARD_PLAYER_2 = []
-        self.BOARD_PLAYER_2_A = []
 
     def clean_board(self, board_user, board_com, board_com2, board_palyer1, board_palyer1_1, board_palyer2, board_palyer2_2):
         """This function clears the boards"""
@@ -659,9 +662,9 @@ class battleship(object):
                 ██║███╗██║██║██║╚██╗██║╚════██║                     
                 ╚███╔███╔╝██║██║ ╚████║███████║                     
                  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝                     """
-        raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
-        self.clean()
-        self.play_again()
+            raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
+            self.clean()
+            self.play_again()
 
     def statistics_2(self,BOARD_PLAYER_2):
         """Prints statistics for player 2"""
@@ -707,9 +710,9 @@ class battleship(object):
                 ██║███╗██║██║██║╚██╗██║╚════██║                 
                 ╚███╔███╔╝██║██║ ╚████║███████║                 
                  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝                 """
-        raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
-        self.clean()
-        self.play_again()
+            raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>" + chr(27) + "[0m")
+            self.clean()
+            self.play_again()
 
     def boat_comp_ready(self):
         """ print message that the computer positioned its boats """
@@ -998,7 +1001,7 @@ class battleship(object):
             """+chr(27)+"[0m"
         time.sleep(2)
         self.reset()
-        os.system("exit")
+        sys.exit(1)
 
     def initial(self):
         """This is the screen to load the game"""
@@ -1129,6 +1132,7 @@ class battleship(object):
             print ""
             print chr(27)+"[0;91m"+" * Enter a valid option 3:   "+chr(27)+"[0m"
             print ""
+            self.clean()
             return self.menu
 
     def menu(self):
