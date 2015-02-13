@@ -71,7 +71,6 @@ class battleship(object):
             guess_row = raw_input(chr(27) + "[0;94m" + "Enter the row:   " + chr(27) + "[0m")
             if guess_row == "exit":
                 self.clean()
-                self.clean_board(self.BOARD_U, self.BOARD_C, self.BOARD_C_2, self.BOARD_PLAYER_1, self.BOARD_PLAYER_1_A, self.BOARD_PLAYER_2, self.BOARD_PLAYER_2_A)
                 self.menu()
                 break
             else:
@@ -82,9 +81,11 @@ class battleship(object):
                         return guess_row
                         break
                     else:
-                        print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean   " + chr(27) + "[0m"
+                        print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean  "\
+                        + chr(27) + "[0m"
                 except ValueError:
-                    print chr(27) + "[0;91m" + "Input coordinates in a range of 1 to 10   " + chr(27) + "[0m"
+                    print chr(27) + "[0;91m" + "Input coordinates in a range of 1 to 10   "\
+                    + chr(27) + "[0m"
 
     def enter_col(self):
         """Check the column value entered by the user  :::"""
@@ -92,7 +93,6 @@ class battleship(object):
             guess_col = raw_input(chr(27) + "[0;94m" + "Enter the column:   " + chr(27) + "[0m")
             if guess_col == "exit":
                 self.clean()
-                self.clean_board(self.BOARD_U, self.BOARD_C, self.BOARD_C_2, self.BOARD_PLAYER_1, self.BOARD_PLAYER_1_A, self.BOARD_PLAYER_2, self.BOARD_PLAYER_2_A)
                 self.menu()
                 break
             else:
@@ -443,39 +443,22 @@ class battleship(object):
         self.hit_player_2(board, boat)
 
 
-    def clean_board(self, board_user, board_com, board_com2, board_palyer1, board_palyer1_1, board_palyer2, board_palyer2_2):
+    def clean_board(self):
         """This function clears the boards"""
-        board_1 = len(board_user)
-        board_2 = len(board_com)
-        board_3 = len(board_com2)
-        board_4 = len(board_palyer1)
-        board_5 = len(board_palyer1_1)
-        board_6 = len(board_palyer2)
-        board_7 = len(board_palyer2_2)
-        if board_1 > 0:
-            for count in range(board_1):
-                del board_user[0]
-        if board_2 > 0:
-            for count in range(board_2):
-                del board_com[0]
-        if board_3 > 0:
-            for count in range(board_3):
-                del board_com2[0]
-        if board_4 > 0:
-            for count in range(board_4):
-                del board_palyer1[0]
-        if board_5 > 0:
-            for count in range(board_5):
-                del board_palyer1_1[0]
-        if board_6 > 0:
-            for count in range(board_6):
-                del board_palyer2[0]
-        if board_7 > 0:
-            for count in range(board_7):
-                del board_palyer2_2[0]
+        self.board = []
+        self.BOARD_U = []
+
+        self.BOARD_C = []
+        self.BOARD_C_2 = []
+
+        self.BOARD_PLAYER_1 = []
+        self.BOARD_PLAYER_1_A = []
+
+        self.BOARD_PLAYER_2 = []
+        self.BOARD_PLAYER_2_A = []
 
     def play_again(self):
-        self.clean_board(self.BOARD_U, self.BOARD_C, self.BOARD_C_2, self.BOARD_PLAYER_1, self.BOARD_PLAYER_1_A, self.BOARD_PLAYER_2, self.BOARD_PLAYER_2_A)
+        self.clean_board()
         self.clean()
         print """
        ___ _                                 _                  
@@ -1133,11 +1116,13 @@ class battleship(object):
             print chr(27)+"[0;91m"+" * Enter a valid option 3:   "+chr(27)+"[0m"
             print ""
             self.clean()
+            self.MENU.stop()
             return self.menu
 
     def menu(self):
         self.LOADING.stop()
         self.MENU.play()
+        self.clean_board()
         reply = False
         while reply == False:
             print """
