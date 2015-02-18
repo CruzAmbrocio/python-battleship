@@ -10,46 +10,46 @@ import pygame
 
 pygame.mixer.init()
 
-class battleship(object):
+class Battleship(object):
     """Class name"""
     def __init__(self):
         self.board = []
-        self.BOARD_U = []
+        self.board_u = []
 
-        self.BOARD_C = []
-        self.BOARD_C_2 = []
+        self.board_c = []
+        self.board_c_2 = []
 
-        self.BOARD_PLAYER_1 = []
-        self.BOARD_PLAYER_1_A = []
+        self.board_player_1 = []
+        self.board_player_1_a = []
 
-        self.BOARD_PLAYER_2 = []
-        self.BOARD_PLAYER_2_A = []
+        self.board_player_2 = []
+        self.board_player_2_a = []
 
-        self.SHIPS = {   "Aircraft Carrier" : 5,
+        self.ships = {   "Aircraft Carrier" : 5,
                     "Battleship" : 4,
                     "Submarine" : 3,
                     "Destroyer" : 3,
                     "Patrol Boat" : 2}
 
-        self.LETTER = {   "Aircraft Carrier" : "| A ",
+        self.letter = {   "Aircraft Carrier" : "| A ",
                      "Battleship" : "| B ",
                      "Submarine" : "| S ",
                      "Destroyer" : "| D ",
                      "Patrol Boat" : "| P "}
 
-        self.WELCOME = pygame.mixer.Sound("WELCOME.wav")
-        self.LOADING = pygame.mixer.Sound("LOADING.wav")
-        self.SINGLE = pygame.mixer.Sound("SINGLE.wav")
-        self.MULTIPLAYER = pygame.mixer.Sound("MULTIPLAYER.wav")
-        self.MENU = pygame.mixer.Sound("MENU.wav")
-        self.ACIERTO = pygame.mixer.Sound("ACIERTO.wav")
-        self.DESACIERTO = pygame.mixer.Sound("DISPAGUA.wav")
-        self.DISPAROS = pygame.mixer.Sound("DISPAROS.wav")
-        self.GAMEOVER = pygame.mixer.Sound("GAMEOVER.wav")
+        self.welcome_sound = pygame.mixer.Sound("WELCOME.wav")
+        self.loading_sound = pygame.mixer.Sound("LOADING.wav")
+        self.single_sound = pygame.mixer.Sound("SINGLE.wav")
+        self.multiplayer_sound = pygame.mixer.Sound("MULTIPLAYER.wav")
+        self.menu_sound = pygame.mixer.Sound("MENU.wav")
+        self.acierto_sound = pygame.mixer.Sound("ACIERTO.wav")
+        self.desacierto_sound = pygame.mixer.Sound("DISPAGUA.wav")
+        self.disparos_sound = pygame.mixer.Sound("DISPAROS.wav")
+        self.gameover_sound = pygame.mixer.Sound("GAMEOVER.wav")
 
     def for_def(self,board):
         """Define measures the board  :::"""
-        for x in range(0,10):
+        for ocean in range(0,10):
             board.append(["|   "] * 10)
         self.print_board(board)
 
@@ -127,36 +127,36 @@ class battleship(object):
     def boat_user(self):
         """Place the user boats  :::"""
         self.place_user()
-        self.for_def(self.BOARD_U)
-        for boat in self.SHIPS:
+        self.for_def(self.board_u)
+        for boat in self.ships:
             repeat = False
             while repeat == False:
                 print "Where you want to place a  '" + chr(27) + "[0;95m" + boat\
                  + chr(27) + "[0m" +\
-                "'  of  '" + chr(27) + "[0;91m" + str(self.SHIPS[boat]) + chr(27)\
+                "'  of  '" + chr(27) + "[0;91m" + str(self.ships[boat]) + chr(27)\
                  + "[0m" + "'   boxes!!..."
                 boat_row = self.enter_row()
                 boat_col = self.enter_col()
                 boat_posi = self.ver_horiz()
                 if boat_posi == "h":
-                    no_encounter = self.encounter_h(self.BOARD_U, self.SHIPS,\
+                    no_encounter = self.encounter_h(self.board_u, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.hori(self.SHIPS, boat_row, boat_col, boat)
-                        self.hori(boat_row,boat_col, boat,self.SHIPS)
+                        ship_Hori = self.hori(self.ships, boat_row, boat_col, boat)
+                        self.hori(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.place_user()
-                        self.print_board(self.BOARD_U)
+                        self.print_board(self.board_u)
                         repeat = True
                 elif boat_posi == "v":
-                    no_encounter2 = self.encounter_v(self.BOARD_U, self.SHIPS,\
+                    no_encounter2 = self.encounter_v(self.board_u, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertl(self.SHIPS, boat_row, boat_col)
+                        ship_vert = self.vertl(self.ships, boat_row, boat_col)
                         self.vertl(boat_row,boat_col, boat)
                         self.clean()
                         self.place_user()
-                        self.print_board(self.BOARD_U)
+                        self.print_board(self.board_u)
                         repeat = True
         print chr(27) + "[0;96m" + "                         Already positioned your ships" \
         + chr(27) + "[0m"
@@ -171,47 +171,47 @@ class battleship(object):
     def boat_player_1(self):
         """Place the Player 1 boats in multiplayer :::"""
         self.clean()
-        self.for_def(self.BOARD_PLAYER_1_A)
+        self.for_def(self.board_player_1_a)
         self.clean()
         self.place_user()
         print chr(27)+"[0;96m" + """      Player 1 puts your ships 
     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                         """+chr(27)+"[0m"
-        self.for_def(self.BOARD_PLAYER_1)
-        for boat in self.SHIPS:
+        self.for_def(self.board_player_1)
+        for boat in self.ships:
             repeat = False
             while repeat == False:
                 print "Where you want to place a  '"+ chr(27)+"[0;95m"+boat+chr(27)\
-                +"[0m"+ "'  of  '" +chr(27)+"[0;91m"+str(self.SHIPS[boat])+chr(27)\
+                +"[0m"+ "'  of  '" +chr(27)+"[0;91m"+str(self.ships[boat])+chr(27)\
                 +"[0m"+ "'   boxes ::: !!..."
                 boat_row = self.enter_row()
                 boat_col = self.enter_col()
                 boat_posi = self.ver_horiz()
                 if boat_posi == "h":
-                    no_encounter = self.encounter_h(self.BOARD_PLAYER_1, self.SHIPS,\
+                    no_encounter = self.encounter_h(self.board_player_1, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.hori1(self.SHIPS, boat_row, boat_col, boat)
-                        self.hori1(boat_row,boat_col, boat,self.SHIPS)
+                        ship_Hori = self.hori1(self.ships, boat_row, boat_col, boat)
+                        self.hori1(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.place_user()
                         print chr(27)+"[0;96m" + """      Player 1 puts your ships 
     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                         """+chr(27)+"[0m"
-                        self.print_board(self.BOARD_PLAYER_1)
+                        self.print_board(self.board_player_1)
                         repeat = True
                 elif boat_posi == "v":
-                    no_encounter2 = self.encounter_v(self.BOARD_PLAYER_1, self.SHIPS,\
+                    no_encounter2 = self.encounter_v(self.board_player_1, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertl1(self.SHIPS, boat_row, boat_col)
+                        ship_vert = self.vertl1(self.ships, boat_row, boat_col)
                         self.vertl1(boat_row,boat_col, boat)
                         self.clean()
                         self.place_user()
                         print chr(27)+"[0;96m" + """      Player 1 puts your ships 
     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                         """+chr(27)+"[0m"
-                        self.print_board(self.BOARD_PLAYER_1)
+                        self.print_board(self.board_player_1)
                         repeat = True
         print chr(27) + "[0;96m" + "                         Already positioned your ships"\
          + chr(27) + "[0m"
@@ -226,47 +226,47 @@ class battleship(object):
     def boat_player_2(self):
         """Place the Player 2 boats in multiplayer :::"""
         self.clean()
-        self.for_def(self.BOARD_PLAYER_2_A)
+        self.for_def(self.board_player_2_a)
         self.clean()
         self.place_user()
         print chr(27)+"[0;93m" + """      Player 2 puts your ships 
     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                         """+chr(27)+"[0m"
-        self.for_def(self.BOARD_PLAYER_2)
-        for boat in self.SHIPS:
+        self.for_def(self.board_player_2)
+        for boat in self.ships:
             repeat = False
             while repeat == False:
                 print "Where you want to place a  '"+ chr(27)+"[0;95m"+boat+chr(27)\
-                +"[0m"+ "'  of  '" +chr(27)+"[0;91m"+str(self.SHIPS[boat])+chr(27)\
+                +"[0m"+ "'  of  '" +chr(27)+"[0;91m"+str(self.ships[boat])+chr(27)\
                 +"[0m"+ "'   boxes ::: !!..."
                 boat_row = self.enter_row()
                 boat_col = self.enter_col()
                 boat_posi = self.ver_horiz()
                 if boat_posi == "h":
-                    no_encounter = self.encounter_h(self.BOARD_PLAYER_2, self.SHIPS, \
+                    no_encounter = self.encounter_h(self.board_player_2, self.ships, \
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.hori2(self.SHIPS, boat_row, boat_col, boat)
-                        self.hori2(boat_row,boat_col, boat,self.SHIPS)
+                        ship_Hori = self.hori2(self.ships, boat_row, boat_col, boat)
+                        self.hori2(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.place_user()
                         print chr(27)+"[0;93m" + """      Player 2 puts your ships 
     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                         """+chr(27)+"[0m"
-                        self.print_board(self.BOARD_PLAYER_2)
+                        self.print_board(self.board_player_2)
                         repeat = True
                 elif boat_posi == "v":
-                    no_encounter2 = self.encounter_v(self.BOARD_PLAYER_2, self.SHIPS,\
+                    no_encounter2 = self.encounter_v(self.board_player_2, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertl2(self.SHIPS, boat_row, boat_col)
+                        ship_vert = self.vertl2(self.ships, boat_row, boat_col)
                         self.vertl2(boat_row,boat_col, boat)
                         self.clean()
                         self.place_user()
                         print chr(27)+"[0;93m" + """      Player 2 puts your ships 
     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
                                                                         """+chr(27)+"[0m"
-                        self.print_board(self.BOARD_PLAYER_2)
+                        self.print_board(self.board_player_2)
                         repeat = True
         print chr(27) + "[0;96m" + "                         Already positioned your ships"\
          + chr(27) + "[0m"
@@ -276,10 +276,10 @@ class battleship(object):
         print "   "
         print chr(27)+"[0;93m" + "<<<<< This is the PLAYER 2 board ::: >>>>>"+chr(27)+"[0m"
         print "   "
-        self.print_board(self.BOARD_PLAYER_2_A)
+        self.print_board(self.board_player_2_a)
         self.hit_player_1(self.board, boat)
         raw_input("\n<<<<< Press enter to place ...   >>>>>")
-        self.statistics_c(self.BOARD_U)
+        self.statistics_c(self.board_u)
 
     def defin_row(self):
         """Check the row value entered by the system   :::"""
@@ -326,77 +326,77 @@ class battleship(object):
         guess_row = self.enter_row()
         guess_col = self.enter_col()
         raw_input(chr(27) + "[0;93m" + "\nShoot ...." + chr(27) + "[0m")
-        self.DISPAROS.play()
+        self.disparos_sound.play()
         time.sleep(0.4)
         for coor in range(1):
-            if self.BOARD_C[guess_row][guess_col] == "| A "\
-             or self.BOARD_C[guess_row][guess_col] == "| S "\
-              or self.BOARD_C[guess_row][guess_col] == "| B "\
-               or self.BOARD_C[guess_row][guess_col] == "| D "\
-                or self.BOARD_C[guess_row][guess_col] == "| P ":
-                self.BOARD_C[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-                self.BOARD_C_2[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-            elif self.BOARD_C[guess_row][guess_col] == "| X ":
+            if self.board_c[guess_row][guess_col] == "| A "\
+             or self.board_c[guess_row][guess_col] == "| S "\
+              or self.board_c[guess_row][guess_col] == "| B "\
+               or self.board_c[guess_row][guess_col] == "| D "\
+                or self.board_c[guess_row][guess_col] == "| P ":
+                self.board_c[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+                self.board_c_2[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+            elif self.board_c[guess_row][guess_col] == "| X ":
                 print chr(27) + "[0;91m"\
                  + " In this pocicion already placed a boat try again ....    " + chr(27) + "[0m"
                 self.hit_user(board,boat)
-            elif self.BOARD_C[guess_row][guess_col] == "| + ":
+            elif self.board_c[guess_row][guess_col] == "| + ":
                 print chr(27) + "[0;91m" + " You've shot in these coordinates....   "\
                  + chr(27) + "[0m"
                 self.hit_user(board,boat)
             else:
-                self.BOARD_C[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
-                self.BOARD_C_2[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
+                self.board_c[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
+                self.board_c_2[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
             self.clean()
             print "   "
             print chr(27) + "[0;92m" + "            This is the SYSTEM board :::" + chr(27) + "[0m"
             print "   "
-            self.print_board(self.BOARD_C_2)
-            self.statistics_c(self.BOARD_C)
+            self.print_board(self.board_c_2)
+            self.statistics_c(self.board_c)
             raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>"\
              + chr(27) + "[0m")
             self.clean()
             print chr(27) + "[0;96m" + "            This is the YOU board :::"\
              + chr(27) + "[0m"
             print "  "
-            self.print_board(self.BOARD_U)
+            self.print_board(self.board_u)
         self.hit_user_com(board, boat)
 
     def hit_user_com(self,board, boat):
         raw_input(chr(27) + "[0;93m" + "\nShoot ...." + chr(27) + "[0m")
         guess_row = self.random_row()
         guess_col = self.random_col()
-        self.DISPAROS.play()
+        self.disparos_sound.play()
         time.sleep(0.4)
         for coor in range(1):
-            if self.BOARD_U[guess_row][guess_col] == "| A " or self.BOARD_U[guess_row][guess_col]\
-             == "| S " or self.BOARD_U[guess_row][guess_col] == "| B " or self.BOARD_U[guess_row]\
-             [guess_col] == "| D " or self.BOARD_U[guess_row][guess_col] == "| P ":
-                self.BOARD_U[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-            elif self.BOARD_C[guess_row][guess_col] == "| X " or self.BOARD_C[guess_row]\
+            if self.board_u[guess_row][guess_col] == "| A " or self.board_u[guess_row][guess_col]\
+             == "| S " or self.board_u[guess_row][guess_col] == "| B " or self.board_u[guess_row]\
+             [guess_col] == "| D " or self.board_u[guess_row][guess_col] == "| P ":
+                self.board_u[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+            elif self.board_c[guess_row][guess_col] == "| X " or self.board_c[guess_row]\
             [guess_col]== "| + ":
                 self.hit_user_com(board,boat)
             else:
-                self.BOARD_U[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
+                self.board_u[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
             self.clean()
             print "   "
             print chr(27) + "[0;96m" + "            This is the YOU board :::" + chr(27) + "[0m"
             print "   "
-            self.print_board(self.BOARD_U)
-            self.statistics(self.BOARD_U)
+            self.print_board(self.board_u)
+            self.statistics(self.board_u)
             raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>"\
              + chr(27) + "[0m")
             self.clean()
             print chr(27) + "[0;92m" + "            This is the SYSTEM board :::"\
              + chr(27) + "[0m"
             print "  "
-            self.print_board(self.BOARD_C_2)
+            self.print_board(self.board_c_2)
         self.hit_user(board, boat)
 
     def hit_player_2(self,board, boat):
@@ -407,41 +407,41 @@ class battleship(object):
         guess_row = self.enter_row()
         guess_col = self.enter_col()
         raw_input(chr(27) + "[0;93m" + "\nShoot ...." + chr(27) + "[0m")
-        self.DISPAROS.play()
+        self.disparos_sound.play()
         time.sleep(0.4)
         for coor in range(1):
-            if self.BOARD_PLAYER_1[guess_row][guess_col] == "| A "\
-             or self.BOARD_PLAYER_1[guess_row][guess_col] == "| S "\
-              or self.BOARD_PLAYER_1[guess_row][guess_col] == "| B "\
-               or self.BOARD_PLAYER_1[guess_row][guess_col] == "| D "\
-                or self.BOARD_PLAYER_1[guess_row][guess_col] == "| P ":
-                self.BOARD_PLAYER_1[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-                self.BOARD_PLAYER_1_A[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-            elif self.BOARD_PLAYER_1[guess_row][guess_col] == "| X " or self.BOARD_PLAYER_1[guess_row]\
+            if self.board_player_1[guess_row][guess_col] == "| A "\
+             or self.board_player_1[guess_row][guess_col] == "| S "\
+              or self.board_player_1[guess_row][guess_col] == "| B "\
+               or self.board_player_1[guess_row][guess_col] == "| D "\
+                or self.board_player_1[guess_row][guess_col] == "| P ":
+                self.board_player_1[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+                self.board_player_1_a[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+            elif self.board_player_1[guess_row][guess_col] == "| X " or self.board_player_1[guess_row]\
             [guess_col]== "| + ":
                 print chr(27)+"[0;91m"+" In this pocicion already placed a boat try again ... "\
                 +chr(27)+"[0m"
                 self.hit_player_1(board, boat)
             else:
-                self.BOARD_PLAYER_1[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
-                self.BOARD_PLAYER_1_A[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
+                self.board_player_1[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
+                self.board_player_1_a[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
             self.clean()
             print "   "
             print chr(27) + "[0;96m" + "            This is the PLAYER 1 board :::" + chr(27)\
              + "[0m"
             print "   "
-            self.print_board(self.BOARD_PLAYER_1_A)
-            self.statistics_2(self.BOARD_PLAYER_2)
+            self.print_board(self.board_player_1_a)
+            self.statistics_2(self.board_player_2)
             raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>"\
             + chr(27) + "[0m")
             self.clean()
             print chr(27) + "[0;93m" + "            This is the PLAYER 2 board :::" + chr(27) + "[0m"
             print "  "
-            self.print_board(self.BOARD_PLAYER_2_A)
+            self.print_board(self.board_player_2_a)
             self.hit_player_1(board, boat)
 
     def hit_player_1(self,board, boat):
@@ -453,60 +453,60 @@ class battleship(object):
         guess_row= self.enter_row()
         guess_col= self.enter_col()
         raw_input(chr(27) + "[0;96m" + "\nShoot ...." + chr(27) + "[0m")
-        self.DISPAROS.play()
+        self.disparos_sound.play()
         time.sleep(0.4)
         for coor in range(1):
-            if self.BOARD_PLAYER_2[guess_row][guess_col] == "| A "\
-             or self.BOARD_PLAYER_2[guess_row][guess_col] == "| S "\
-              or self.BOARD_PLAYER_2[guess_row][guess_col] == "| B "\
-               or self.BOARD_PLAYER_2[guess_row][guess_col] == "| D "\
-                or self.BOARD_PLAYER_2[guess_row][guess_col] == "| P ":
-                self.BOARD_PLAYER_2[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-                self.BOARD_PLAYER_2_A[guess_row][guess_col] = "| X "
-                self.ACIERTO.play()
-            elif self.BOARD_PLAYER_2[guess_row][guess_col] == "| X ":
+            if self.board_player_2[guess_row][guess_col] == "| A "\
+             or self.board_player_2[guess_row][guess_col] == "| S "\
+              or self.board_player_2[guess_row][guess_col] == "| B "\
+               or self.board_player_2[guess_row][guess_col] == "| D "\
+                or self.board_player_2[guess_row][guess_col] == "| P ":
+                self.board_player_2[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+                self.board_player_2_a[guess_row][guess_col] = "| X "
+                self.acierto_sound.play()
+            elif self.board_player_2[guess_row][guess_col] == "| X ":
                 print chr(27)+"[0;91m"+" In this pocicion already placed a boat try again ... "\
                 +chr(27)+"[0m"
-            elif self.BOARD_PLAYER_2[guess_row][guess_col] == "| + ":
+            elif self.board_player_2[guess_row][guess_col] == "| + ":
                 print chr(27) + "[0;91m" + " You've shot in these coordinates....   "\
                  + chr(27) + "[0m"
                 self.hit_player_1(board, boat)
             else:
-                self.BOARD_PLAYER_2[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
-                self.BOARD_PLAYER_2_A[guess_row][guess_col] = "| + "
-                self.DESACIERTO.play()
+                self.board_player_2[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
+                self.board_player_2_a[guess_row][guess_col] = "| + "
+                self.desacierto_sound.play()
             self.clean()
             print "   "
             print chr(27) + "[0;93m" + "            This is the PLAYER 2 board :::"\
              + chr(27) + "[0m"
             print "   "
-            self.print_board(self.BOARD_PLAYER_2_A)
-            self.statistics_1(self.BOARD_PLAYER_1)
+            self.print_board(self.board_player_2_a)
+            self.statistics_1(self.board_player_1)
             raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>"\
              + chr(27) + "[0m")
             self.clean()
             print chr(27) + "[0;96m" + "            This is the PLAYER 2 board :::"\
              + chr(27) + "[0m"
             print "  "
-            self.print_board(self.BOARD_PLAYER_1_A)
+            self.print_board(self.board_player_1_a)
         self.hit_player_2(board, boat)
 
 
     def clean_board(self):
         """This function clears the boards"""
         self.board = []
-        self.BOARD_U = []
+        self.board_u = []
 
-        self.BOARD_C = []
-        self.BOARD_C_2 = []
+        self.board_c = []
+        self.board_c_2 = []
 
-        self.BOARD_PLAYER_1 = []
-        self.BOARD_PLAYER_1_A = []
+        self.board_player_1 = []
+        self.board_player_1_a = []
 
-        self.BOARD_PLAYER_2 = []
-        self.BOARD_PLAYER_2_A = []
+        self.board_player_2 = []
+        self.board_player_2_a = []
 
     def play_again(self):
         self.clean_board()
@@ -540,7 +540,7 @@ class battleship(object):
 
     def you_lost(self):
         """game over printed message"""
-        self.GAMEOVER.play()
+        self.gameover_sound.play()
         print """
         ██╗   ██╗ ██████╗ ██╗   ██╗            ██╗      ██████╗ ███████╗████████╗   
         ╚██╗ ██╔╝██╔═══██╗██║   ██║            ██║     ██╔═══██╗██╔════╝╚══██╔══╝   
@@ -569,7 +569,7 @@ class battleship(object):
         self.clean()
         self.play_again()
 
-    def statistics(self,BOARD_C):
+    def statistics(self,board_c):
         """computer prints statistics"""
         count = 0
         aircraft = 0
@@ -579,15 +579,15 @@ class battleship(object):
         patrol = 0
         while count != 10:
             for col in range(10):
-                if " A " in self.BOARD_U[count][col]:
+                if " A " in self.board_u[count][col]:
                     aircraft += 1
-                if " B " in self.BOARD_U[count][col]:
+                if " B " in self.board_u[count][col]:
                     battleship += 1
-                if " D " in self.BOARD_U[count][col]:
+                if " D " in self.board_u[count][col]:
                     destroyer += 1
-                if " S " in self.BOARD_U[count][col]:
+                if " S " in self.board_u[count][col]:
                     submarine += 1
-                if " P " in self.BOARD_U[count][col]:
+                if " P " in self.board_u[count][col]:
                     patrol += 1
             count += 1
         print ""
@@ -599,7 +599,7 @@ class battleship(object):
         print "  destroyer:        3     " + chr(27) + "[0;91m" + str(destroyer) + chr(27) + "[0m"
         print "  patrol:           2     " + chr(27) + "[0;91m" + str(patrol) + chr(27) + "[0m"
         if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
-            self.GAMEOVER.play()
+            self.gameover_sound.play()
             self.you_lost()
 
     def you_win(self):
@@ -621,7 +621,7 @@ class battleship(object):
         self.clean()
         self.play_again()
 
-    def statistics_c(self,BOARD_U):
+    def statistics_c(self,board_u):
         """computer prints statistics"""
         count = 0
         aircraft = 0
@@ -631,15 +631,15 @@ class battleship(object):
         patrol = 0
         while count != 10:
             for col in range(10):
-                if " A " in self.BOARD_C[count][col]:
+                if " A " in self.board_c[count][col]:
                     aircraft += 1
-                if " B " in self.BOARD_C[count][col]:
+                if " B " in self.board_c[count][col]:
                     battleship += 1
-                if " D " in self.BOARD_C[count][col]:
+                if " D " in self.board_c[count][col]:
                     destroyer += 1
-                if " S " in self.BOARD_C[count][col]:
+                if " S " in self.board_c[count][col]:
                     submarine += 1
-                if " P " in self.BOARD_C[count][col]:
+                if " P " in self.board_c[count][col]:
                     patrol += 1
             count += 1
         print ""
@@ -654,7 +654,7 @@ class battleship(object):
         if aircraft == 0 and battleship == 0 and submarine == 0 and destroyer == 0 and patrol == 0:
             self.you_win()
 
-    def statistics_1(self,BOARD_PLAYER_1):
+    def statistics_1(self,board_player_1):
         """Prints statistics for player 1"""
         count = 0
         aircraft = 0
@@ -664,15 +664,15 @@ class battleship(object):
         patrol = 0
         while count != 10:
             for col in range(10):
-                if " A " in self.BOARD_PLAYER_2[count][col]:
+                if " A " in self.board_player_2[count][col]:
                     aircraft += 1
-                if " B " in self.BOARD_PLAYER_2[count][col]:
+                if " B " in self.board_player_2[count][col]:
                     battleship += 1
-                if " D " in self.BOARD_PLAYER_2[count][col]:
+                if " D " in self.board_player_2[count][col]:
                     destroyer += 1
-                if " S " in self.BOARD_PLAYER_2[count][col]:
+                if " S " in self.board_player_2[count][col]:
                     submarine += 1
-                if " P " in self.BOARD_PLAYER_2[count][col]:
+                if " P " in self.board_player_2[count][col]:
                     patrol += 1
             count += 1
         print ""
@@ -703,7 +703,7 @@ class battleship(object):
             self.clean()
             self.play_again()
 
-    def statistics_2(self,BOARD_PLAYER_2):
+    def statistics_2(self,board_player_2):
         """Prints statistics for player 2"""
         count = 0
         aircraft = 0
@@ -713,15 +713,15 @@ class battleship(object):
         patrol = 0
         while count != 10:
             for col in range(10):
-                if " A " in self.BOARD_PLAYER_1[count][col]:
+                if " A " in self.board_player_1[count][col]:
                     aircraft += 1
-                if " B " in self.BOARD_PLAYER_1[count][col]:
+                if " B " in self.board_player_1[count][col]:
                     battleship += 1
-                if " D " in self.BOARD_PLAYER_1[count][col]:
+                if " D " in self.board_player_1[count][col]:
                     destroyer += 1
-                if " S " in self.BOARD_PLAYER_1[count][col]:
+                if " S " in self.board_player_1[count][col]:
                     submarine += 1
-                if " P " in self.BOARD_PLAYER_1[count][col]:
+                if " P " in self.board_player_1[count][col]:
                     patrol += 1
             count += 1
         print ""
@@ -776,31 +776,31 @@ class battleship(object):
 
     def boat_comp(self):
         """Place the user boats  :::"""
-        self.for_def(self.BOARD_C)
-        self.for_def(self.BOARD_C_2)
-        for boat in self.SHIPS:
+        self.for_def(self.board_c)
+        self.for_def(self.board_c_2)
+        for boat in self.ships:
             repeat = False
             while repeat == False:
                 print "Where you want to place a  '" + chr(27) + "[0;95m"\
                  + boat + chr(27) + "[0m" + "'  of  '" +chr(27)+"[0;91m"\
-                 +str(self.SHIPS[boat])+chr(27)+"[0m"+ "'   boxes ::: !!..."
+                 +str(self.ships[boat])+chr(27)+"[0m"+ "'   boxes ::: !!..."
                 boat_row = self.defin_row()
                 boat_col = self.defin_col()
                 boat_posi = self.ver_horiz_aleat()
                 if boat_posi == "h":
-                    no_encounter = self.encounter_h(self.BOARD_C, self.SHIPS,\
+                    no_encounter = self.encounter_h(self.board_c, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.horizon_comp(self.SHIPS, boat_row, boat_col, boat)
-                        self.horizon_comp(boat_row,boat_col, boat,self.SHIPS)
+                        ship_Hori = self.horizon_comp(self.ships, boat_row, boat_col, boat)
+                        self.horizon_comp(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.boat_comp_ready()
                         repeat = True
                 elif boat_posi == "v":
-                    no_encounter2 = self.encounter_v(self.BOARD_C, self.SHIPS,\
+                    no_encounter2 = self.encounter_v(self.board_c, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertical_comp(self.SHIPS, boat_row, boat_col)
+                        ship_vert = self.vertical_comp(self.ships, boat_row, boat_col)
                         self.vertical_comp(boat_row,boat_col, boat)
                         self.clean() 
                         self.boat_comp_ready()
@@ -830,11 +830,11 @@ class battleship(object):
         print "   "
         print chr(27) + "[0;92m" + "            This is the SYSTEM board :::" + chr(27) + "[0m"
         print "   "
-        self.print_board(self.BOARD_C_2)
+        self.print_board(self.board_c_2)
         self.hit_user(self.board, boat)
         raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>"\
          + chr(27) + "[0m")
-        self.statistics_c(self.BOARD_U)
+        self.statistics_c(self.board_u)
 
     def ready(self):
         """printed message all ready to play"""
@@ -857,22 +857,22 @@ class battleship(object):
          + chr(27) + "[0m")
         self.clean()
         print "   "
-        self.print_board(self.BOARD_PLAYER_2_A)
+        self.print_board(self.board_player_2_a)
         self.hit_player_1(board, boat)
         raw_input(chr(27) + "[0;95m" + "\n<<<<< Press enter to continue ...   >>>>>"\
          + chr(27) + "[0m")
-        self.statistics_2(self.BOARD_PLAYER_2)
+        self.statistics_2(self.board_player_2)
 
 
     def horizon_comp(self,c_x, c_y, boat,new):
         """characters placed horizontally boats  :::"""
         try:
-            for coor in range(self.SHIPS[boat]):
-                self.BOARD_C[c_x][c_y + coor] = self.LETTER[boat]
+            for coor in range(self.ships[boat]):
+                self.board_c[c_x][c_y + coor] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_C[c_x][c_y + coor] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_c[c_x][c_y + coor] = "|   "
             except:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
@@ -880,12 +880,12 @@ class battleship(object):
     def vertical_comp(self,c_x, c_y, boat):
         """characters placed vertically boats  :::"""
         try:
-            for coor in range(self.SHIPS[boat]):
-                self.BOARD_C[c_x + coor][c_y] = self.LETTER[boat]
+            for coor in range(self.ships[boat]):
+                self.board_c[c_x + coor][c_y] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_C[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_c[c_x + coor][c_y] = "|   "
             except:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
@@ -947,12 +947,12 @@ class battleship(object):
     def hori(self,c_x, c_y, boat,new):
         """characters placed horizontal boats  :::"""
         try:
-             for coor in range(self.SHIPS[boat]):
-                self.BOARD_U[c_x][c_y + coor] = self.LETTER[boat]
+             for coor in range(self.ships[boat]):
+                self.board_u[c_x][c_y + coor] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_U[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_u[c_x + coor][c_y] = "|   "
             except:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
@@ -960,12 +960,12 @@ class battleship(object):
     def vertl(self,c_x, c_y, boat):
         """characters placed vertically boats  :::"""
         try:
-            for coor in range(self.SHIPS[boat]):
-                self.BOARD_U[c_x + coor][c_y] = self.LETTER[boat]
+            for coor in range(self.ships[boat]):
+                self.board_u[c_x + coor][c_y] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_U[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_u[c_x + coor][c_y] = "|   "
             except:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
@@ -973,48 +973,48 @@ class battleship(object):
     def hori1(self,c_x, c_y, boat,new):
         """characters placed horizontal boats  :::"""
         try:
-             for coor in range(self.SHIPS[boat]):
-                self.BOARD_PLAYER_1[c_x][c_y + coor] = self.LETTER[boat]
+             for coor in range(self.ships[boat]):
+                self.board_player_1[c_x][c_y + coor] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_PLAYER_1[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_player_1[c_x + coor][c_y] = "|   "
             except:
                 print "coordinate table is out of the ocean"
 
     def vertl1(self,c_x, c_y, boat):
         """characters placed vertically boats  :::"""
         try:
-            for coor in range(self.SHIPS[boat]):
-                self.BOARD_PLAYER_1[c_x + coor][c_y] = self.LETTER[boat]
+            for coor in range(self.ships[boat]):
+                self.board_player_1[c_x + coor][c_y] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_PLAYER_1[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_player_1[c_x + coor][c_y] = "|   "
             except:
                 print "coordinate table is out of the ocean"
 
     def hori2(self,c_x, c_y, boat,new):
         """characters placed horizontal boats  :::"""
         try:
-             for coor in range(self.SHIPS[boat]):
-                self.BOARD_PLAYER_2[c_x][c_y + coor] =self.LETTER[boat]
+             for coor in range(self.ships[boat]):
+                self.board_player_2[c_x][c_y + coor] =self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_PLAYER_2[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_player_2[c_x + coor][c_y] = "|   "
             except:
                 print "coordinate table is out of the ocean"
 
     def vertl2(self,c_x, c_y, boat):
         """characters placed vertically boats  :::"""
         try:
-            for coor in range(self.SHIPS[boat]):
-                self.BOARD_PLAYER_2[c_x + coor][c_y] = self.LETTER[boat]
+            for coor in range(self.ships[boat]):
+                self.board_player_2[c_x + coor][c_y] = self.letter[boat]
         except:
             try:
-                for coor in range(self.SHIPS[boat]):
-                    self.BOARD_PLAYER_2[c_x + coor][c_y] = "|   "
+                for coor in range(self.ships[boat]):
+                    self.board_player_2[c_x + coor][c_y] = "|   "
             except:
                 print "coordinate table is out of the ocean"
 
@@ -1192,12 +1192,14 @@ class battleship(object):
             print chr(27)+"[0;91m"+" * Enter a valid option 3:   "+chr(27)+"[0m"
             print ""
             self.clean()
-            self.MENU.stop()
+            self.menu_sound.stop()
             return self.menu
 
     def menu(self):
-        self.LOADING.stop()
-        self.MENU.play()
+        self.single_sound.stop()
+        self.multiplayer_sound.stop()
+        self.loading_sound.stop()
+        self.menu_sound.play()
         self.clean_board()
         reply = False
         while reply == False:
@@ -1232,8 +1234,8 @@ class battleship(object):
     def name_user(self):
         """This is a user name """
         self.clean()
-        self.MENU.stop()
-        self.SINGLE.play(15)
+        self.menu_sound.stop()
+        self.single_sound.play(15)
         print """
                ___       _   _   _           _     _      ™   
               / __\ __ _| |_| |_| | ___  ___| |__ (_)_ __     
@@ -1271,8 +1273,8 @@ class battleship(object):
 
     def wel_multiplayer(self):
         self.clean()
-        self.MENU.stop()
-        self.MULTIPLAYER.play(25)
+        self.menu_sound.stop()
+        self.multiplayer_sound.play(25)
         print chr(27) + "[0;91m" + """
                       _ _   _       _                           
           /\/\  _   _| | |_(_)_ __ | | __ _ _   _  ___ _ __     
@@ -1294,7 +1296,7 @@ class battleship(object):
 
     def welcome(self):
         """This is the first image of the game"""
-        self.WELCOME.play()
+        self.welcome_sound.play()
         self.clean()
         print"    "
         print """
@@ -1326,7 +1328,7 @@ class battleship(object):
 
     def repeat_bar(self):
         """This is the bar to load the game"""
-        self.LOADING.play()
+        self.loading_sound.play()
         self.clean()
         print"    "
         print"    "
@@ -1456,5 +1458,5 @@ class battleship(object):
         self.repeat_bar()
         self.menu()
 
-play = battleship()
-play.init()
+battle = Battleship()
+battle.init()
