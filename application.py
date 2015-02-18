@@ -79,7 +79,7 @@ class Battleship(object):
                     if guess_row >=1 and guess_row <=10:
                         guess_row -=1
                         return guess_row
-                        break  
+
                     else:
                         print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean  "\
                         + chr(27) + "[0m"
@@ -101,7 +101,7 @@ class Battleship(object):
                     if guess_col >=1 and guess_col <=10:
                         guess_col -=1
                         return guess_col
-                        break
+
                     else:
                         print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean   " + chr(27)+"[0m"
                 except ValueError:
@@ -142,7 +142,7 @@ class Battleship(object):
                     no_encounter = self.encounter_h(self.board_u, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.hori(self.ships, boat_row, boat_col, boat)
+
                         self.hori(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.place_user()
@@ -152,7 +152,7 @@ class Battleship(object):
                     no_encounter2 = self.encounter_v(self.board_u, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertl(self.ships, boat_row, boat_col)
+
                         self.vertl(boat_row,boat_col, boat)
                         self.clean()
                         self.place_user()
@@ -191,7 +191,7 @@ class Battleship(object):
                     no_encounter = self.encounter_h(self.board_player_1, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.hori1(self.ships, boat_row, boat_col, boat)
+
                         self.hori1(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.place_user()
@@ -204,7 +204,7 @@ class Battleship(object):
                     no_encounter2 = self.encounter_v(self.board_player_1, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertl1(self.ships, boat_row, boat_col)
+
                         self.vertl1(boat_row,boat_col, boat)
                         self.clean()
                         self.place_user()
@@ -246,7 +246,7 @@ class Battleship(object):
                     no_encounter = self.encounter_h(self.board_player_2, self.ships, \
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.hori2(self.ships, boat_row, boat_col, boat)
+
                         self.hori2(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.place_user()
@@ -259,7 +259,7 @@ class Battleship(object):
                     no_encounter2 = self.encounter_v(self.board_player_2, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertl2(self.ships, boat_row, boat_col)
+
                         self.vertl2(boat_row,boat_col, boat)
                         self.clean()
                         self.place_user()
@@ -290,7 +290,7 @@ class Battleship(object):
                 if ship_row >=1 and ship_row <=10:
                     ship_row -=1
                     return ship_row
-                    break
+
                 else:
                     print "   "
             except ValueError:
@@ -305,7 +305,7 @@ class Battleship(object):
                 if ship_col >=1 and ship_col <=10:
                     ship_col -=1
                     return ship_col
-                    break
+
                 else:
                     print "   "
             except ValueError:
@@ -791,7 +791,7 @@ class Battleship(object):
                     no_encounter = self.encounter_h(self.board_c, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter != False:
-                        ship_Hori = self.horizon_comp(self.ships, boat_row, boat_col, boat)
+
                         self.horizon_comp(boat_row,boat_col, boat,self.ships)
                         self.clean()
                         self.boat_comp_ready()
@@ -800,7 +800,7 @@ class Battleship(object):
                     no_encounter2 = self.encounter_v(self.board_c, self.ships,\
                      boat, boat_row, boat_col)
                     if no_encounter2 != False:
-                        ship_vert = self.vertical_comp(self.ships, boat_row, boat_col)
+
                         self.vertical_comp(boat_row,boat_col, boat)
                         self.clean() 
                         self.boat_comp_ready()
@@ -869,11 +869,11 @@ class Battleship(object):
         try:
             for coor in range(self.ships[boat]):
                 self.board_c[c_x][c_y + coor] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_c[c_x][c_y + coor] = "|   "
-            except:
+            except ValueError:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
 
@@ -882,11 +882,11 @@ class Battleship(object):
         try:
             for coor in range(self.ships[boat]):
                 self.board_c[c_x + coor][c_y] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_c[c_x + coor][c_y] = "|   "
-            except:
+            except ValueError:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
 
@@ -901,10 +901,10 @@ class Battleship(object):
             print reply_low
             if reply_low == "h":
                 return "h"
-                break
+
             elif reply_low == "v":
                 return "v"
-                break
+
             else:
                 print ""
                 print "Enter valid characters"
@@ -916,7 +916,7 @@ class Battleship(object):
             for thing in range(new[boat]):
                 if "|   " in board[c_x + thing][c_y]:
                     count += 1 
-        except: 
+        except IOError: 
             print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>"\
              + chr(27) + "[0m"
             return False
@@ -933,7 +933,7 @@ class Battleship(object):
             for thing in range(new[boat]):
                 if "|   " in board[c_x][c_y + thing]:
                     count += 1 
-        except: 
+        except IOError: 
             print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>"\
              + chr(27) + "[0m"
             return False
@@ -949,11 +949,11 @@ class Battleship(object):
         try:
              for coor in range(self.ships[boat]):
                 self.board_u[c_x][c_y + coor] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_u[c_x + coor][c_y] = "|   "
-            except:
+            except ValueError:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
 
@@ -962,11 +962,11 @@ class Battleship(object):
         try:
             for coor in range(self.ships[boat]):
                 self.board_u[c_x + coor][c_y] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_u[c_x + coor][c_y] = "|   "
-            except:
+            except ValueError:
                 print chr(27) + "[0;9m" + "\n<<<<< coordinate table is out of the ocean   >>>>>"\
                  + chr(27) + "[0m"
 
@@ -975,11 +975,11 @@ class Battleship(object):
         try:
              for coor in range(self.ships[boat]):
                 self.board_player_1[c_x][c_y + coor] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_player_1[c_x + coor][c_y] = "|   "
-            except:
+            except ValueError:
                 print "coordinate table is out of the ocean"
 
     def vertl1(self,c_x, c_y, boat):
@@ -987,11 +987,11 @@ class Battleship(object):
         try:
             for coor in range(self.ships[boat]):
                 self.board_player_1[c_x + coor][c_y] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_player_1[c_x + coor][c_y] = "|   "
-            except:
+            except ValueError:
                 print "coordinate table is out of the ocean"
 
     def hori2(self,c_x, c_y, boat,new):
@@ -999,11 +999,11 @@ class Battleship(object):
         try:
              for coor in range(self.ships[boat]):
                 self.board_player_2[c_x][c_y + coor] =self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_player_2[c_x + coor][c_y] = "|   "
-            except:
+            except ValueError:
                 print "coordinate table is out of the ocean"
 
     def vertl2(self,c_x, c_y, boat):
@@ -1011,11 +1011,11 @@ class Battleship(object):
         try:
             for coor in range(self.ships[boat]):
                 self.board_player_2[c_x + coor][c_y] = self.letter[boat]
-        except:
+        except ValueError:
             try:
                 for coor in range(self.ships[boat]):
                     self.board_player_2[c_x + coor][c_y] = "|   "
-            except:
+            except value:
                 print "coordinate table is out of the ocean"
 
     def ver_horiz(self ):
@@ -1027,10 +1027,10 @@ class Battleship(object):
             reply_low = reply_user.lower()
             if reply_low == "h":
                 return "h"
-                break
+
             elif reply_low == "v":
                 return "v"
-                break
+
             else:
                 print ""
                 print "Enter valid characters"
@@ -1144,7 +1144,7 @@ class Battleship(object):
             print chr(27) + "[0;91m"+"  <<< * Enter a valid option 4: >>>   " + chr(27)+"[0m"
             self.instructions()
 
-    def by(self):
+    def by_create(self):
         """about the game"""
         self.clean()
         print """
@@ -1182,7 +1182,7 @@ class Battleship(object):
 
     def find(self,option):
         dic_menu = {"1": self.name_user,  "2": self.wel_multiplayer, "3": self.instructions,\
-         "4": self.by, "5": self.exit}
+         "4": self.by_create, "5": self.exit}
         count = 0
         if option in dic_menu:
             self.clean()
@@ -1458,5 +1458,5 @@ class Battleship(object):
         self.repeat_bar()
         self.menu()
 
-battle = Battleship()
-battle.init()
+Battle = Battleship()
+Battle.init()
