@@ -79,7 +79,7 @@ class Battleship(object):
                     if guess_row >=1 and guess_row <=10:
                         guess_row -=1
                         return guess_row
-                        break
+                        break  
                     else:
                         print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean  "\
                         + chr(27) + "[0m"
