@@ -79,7 +79,6 @@ class Battleship(object):
                     if guess_row >=1 and guess_row <=10:
                         guess_row -=1
                         return guess_row
-
                     else:
                         print chr(27) + "[0;91m" + "This coordinate does not exist in the ocean  "\
                         + chr(27) + "[0m"
@@ -916,7 +915,7 @@ class Battleship(object):
             for thing in range(new[boat]):
                 if "|   " in board[c_x + thing][c_y]:
                     count += 1 
-        except IOError: 
+        except: 
             print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>"\
              + chr(27) + "[0m"
             return False
@@ -933,7 +932,7 @@ class Battleship(object):
             for thing in range(new[boat]):
                 if "|   " in board[c_x][c_y + thing]:
                     count += 1 
-        except IOError: 
+        except: 
             print chr(27) + "[0;9m" + "\n<<<<< There is already a boat here insert new coordinates   >>>>>"\
              + chr(27) + "[0m"
             return False
